@@ -53,7 +53,10 @@ namespace UCOCompilador12023.DataCache
 
         public static void ReturnIndex()
         {
-            INSTANCE.CurrentIndex = INSTANCE.CurrentIndex - 1;
+            if (!"@FL@".Equals(INSTANCE.CurrentCharacter))
+            {
+                INSTANCE.CurrentIndex = INSTANCE.CurrentIndex - 1;
+            }
         }
 
         public static int GetCurrentNumberLine()

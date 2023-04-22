@@ -5,3 +5,11 @@ C:\Users\wsancheg\source\repos\UCOCompilador12023\UCOCompilador12023\obj\Debug\U
 C:\Users\wsancheg\source\repos\UCOCompilador12023\UCOCompilador12023\obj\Debug\UCOCompilador12023.csproj.CoreCompileInputs.cache
 C:\Users\wsancheg\source\repos\UCOCompilador12023\UCOCompilador12023\obj\Debug\UCOCompilador12023.exe
 C:\Users\wsancheg\source\repos\UCOCompilador12023\UCOCompilador12023\obj\Debug\UCOCompilador12023.pdb
+C:\Users\Usuario\Desktop\Compiladores\ExtraClase\CompiladorExtraClase\UCOCompilador12023\bin\Debug\UCOCompilador12023.exe.config
+C:\Users\Usuario\Desktop\Compiladores\ExtraClase\CompiladorExtraClase\UCOCompilador12023\bin\Debug\UCOCompilador12023.exe
+C:\Users\Usuario\Desktop\Compiladores\ExtraClase\CompiladorExtraClase\UCOCompilador12023\bin\Debug\UCOCompilador12023.pdb
+C:\Users\Usuario\Desktop\Compiladores\ExtraClase\CompiladorExtraClase\UCOCompilador12023\obj\Debug\UCOCompilador12023.csproj.AssemblyReference.cache
+C:\Users\Usuario\Desktop\Compiladores\ExtraClase\CompiladorExtraClase\UCOCompilador12023\obj\Debug\UCOCompilador12023.csproj.SuggestedBindingRedirects.cache
+C:\Users\Usuario\Desktop\Compiladores\ExtraClase\CompiladorExtraClase\UCOCompilador12023\obj\Debug\UCOCompilador12023.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\Desktop\Compiladores\ExtraClase\CompiladorExtraClase\UCOCompilador12023\obj\Debug\UCOCompilador12023.exe
+C:\Users\Usuario\Desktop\Compiladores\ExtraClase\CompiladorExtraClase\UCOCompilador12023\obj\Debug\UCOCompilador12023.pdb

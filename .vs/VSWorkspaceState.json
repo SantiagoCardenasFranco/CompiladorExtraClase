@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\UCOCompilador12023",
+    "\\UCOCompilador12023\\DataCache",
+    "\\UCOCompilador12023\\LexicalAnalyzer"
   ],
-  "SelectedNode": "\\UCOCompilador12023.sln",
+  "SelectedNode": "\\UCOCompilador12023\\DataCache\\Scanner.cs",
   "PreviewInSolutionExplorer": false
 }

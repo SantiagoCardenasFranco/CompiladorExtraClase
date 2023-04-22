@@ -16,6 +16,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private int CurrentState;
         private string Lexeme;
         private bool Continue;
+        private LexicalComponent Component;
 
         public static void Initialize()
         {
@@ -320,7 +321,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
                 }
             }
 
-            return null;
+            return INSTANCE.Component;
         }
 
         private static void ProcessState0()
@@ -436,6 +437,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
 
         private static void ProcessState1()
         {
+            Scanner.ReadNextCharacter();
             if (IsLetter())
             {
                 Concanate();
@@ -449,13 +451,12 @@ namespace UCOCompilador12023.LexicalAnalyzer
 
         private static void ProcessState2()
         {
-            //Retorna identificador, devuelve puntero 
-            returnData();
-            INSTANCE.CurrentState = 0;
+            CreateComponentReturningIndex(Category.IDENTIFICADOR);
         }
 
         private static void ProcessState3()
         {
+            Scanner.ReadNextCharacter();
             if (IsDigit())
             {
                 Concanate();
@@ -475,12 +476,12 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState4()
         {
             //Retorna entero, devuelve puntero
-            returnData();
-            INSTANCE.CurrentState = 0;
+            CreateComponentReturningIndex(Category.ENTERO);
         }
 
         private static void ProcessState5()
         {
+            Scanner.ReadNextCharacter();
             if (IsDigit())
             {
                 Concanate();
@@ -494,6 +495,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
 
         private static void ProcessState6()
         {
+            Scanner.ReadNextCharacter();
             if (IsDigit())
             {
                 Concanate();
@@ -508,8 +510,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState7()
         {
             //Retorno decimal, devuelve puntero
-            returnData();
-            INSTANCE.CurrentState = 0;
+            CreateComponentReturningIndex(Category.DECIMAL);
         }
 
         private static void ProcessState8()
@@ -522,36 +523,31 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState9()
         {
             //Retorno resta
-            returnData();
-            INSTANCE.CurrentState = 0;
+            CreateComponentWithoutReturningIndex(Category.RESTA);
         }
 
         private static void ProcessState10()
         {
             //Retorno multiplicación
-            returnData();
-            INSTANCE.CurrentState = 0;
+            CreateComponentWithoutReturningIndex(Category.MULTIPLICACION);
         }
 
         private static void ProcessState11()
         {
             //Retorno división 
-            returnData();
-            INSTANCE.CurrentState = 0;
+            CreateComponentWithoutReturningIndex(Category.DIVISION);
         }
 
         private static void ProcessState12()
         {
             //Retorno parentesis abre
-            returnData();
-            INSTANCE.CurrentState = 0;
+            CreateComponentWithoutReturningIndex(Category.PARENTESIS_ABRE);
         }
 
         private static void ProcessState13()
         {
             //Retorno parentesis cierra
-            returnData();
-            INSTANCE.CurrentState = 0;
+            CreateComponentWithoutReturningIndex(Category.PARENTESIS_CIERRA);
         }
 
         private static void ProcessState14()
@@ -608,8 +604,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState16()
         {
             //Retorno y lógico
-            returnData();
-            INSTANCE.CurrentState = 0;
+            CreateComponentWithoutReturningIndex(Category.Y);
         }
 
         private static void ProcessState18()
@@ -627,14 +622,14 @@ namespace UCOCompilador12023.LexicalAnalyzer
 
         private static void ProcessState19()
         {
-            loadNextLine();
+            Scanner.LoadNextLine();
+            Restart();
         }
 
         private static void ProcessState20()
         {
             //Retorno fin del archivo
-            returnData();
-            INSTANCE.CurrentState = 0;
+            CreateComponentWithoutReturningIndex(Category.FIN_DE_ARCHIVO);
         }
 
         private static void ProcessState21()
@@ -656,8 +651,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState22()
         {
             //Retorno menor que, devuelve puntero
-            returnData();
-            INSTANCE.CurrentState= 0;
+            CreateComponentWithoutReturningIndex(Category.MENOR_QUE);
         }
         private static void ProcessState23()
         {
@@ -675,8 +669,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState24()
         {
             //Retorno mayor que, devuelve puntero
-            returnData();
-            INSTANCE.CurrentState = 0;
+            CreateComponentWithoutReturningIndex(Category.MAYOR_QUE);
         }
 
         private static void ProcessState25()
@@ -832,8 +825,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState37()
         {
             //Retorna suma
-            returnData();
-            INSTANCE.CurrentState = 0;
+            CreateComponentWithoutReturningIndex(Category.SUMA);
         }
 
         private static void ProcessState38()
@@ -962,8 +954,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState50()
         {
             //Retorna inicio archivo
-            returnData();
-            INSTANCE.CurrentState = 0;
+            CreateComponentWithoutReturningIndex(Category.INICIO_ARCHIVO);
         }
 
         private static void ProcessState51()
@@ -1150,9 +1141,28 @@ namespace UCOCompilador12023.LexicalAnalyzer
 
 
 
+        private static void CreateComponent(Category category)
+        {
+            int lineNumber = Scanner.GetCurrentNumberLine();
+            int finalPosition = Scanner.GetCurrentIndex() - 1;
+            int initialPosition = Scanner.GetCurrentIndex() - INSTANCE.Lexeme.Length;
+            INSTANCE.Component = LexicalComponent.Create(lineNumber, initialPosition, finalPosition, category, INSTANCE.Lexeme);
+        }
+
+        private static void CreateComponentWithoutReturningIndex(Category category)
+        {
+            INSTANCE.Continue = false;
+            CreateComponent(category);
+        }
 
 
+        private static void CreateComponentReturningIndex(Category category)
+        {
+            Scanner.ReturnIndex();
+            INSTANCE.Continue = false;
 
+            CreateComponent(category);
+        }
 
 
 
