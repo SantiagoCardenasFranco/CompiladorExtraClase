@@ -46,7 +46,11 @@
     <Compile Include="DataCache\Cache.cs" />
     <Compile Include="DataCache\Line.cs" />
     <Compile Include="DataCache\Scanner.cs" />
+    <Compile Include="ErrorManager\Error.cs" />
+    <Compile Include="ErrorManager\ErrorLevel.cs" />
+    <Compile Include="ErrorManager\ErrorType.cs" />
     <Compile Include="LexicalAnalyzer\Category.cs" />
+    <Compile Include="LexicalAnalyzer\ComponentType.cs" />
     <Compile Include="LexicalAnalyzer\GrammaticalCategory.cs" />
     <Compile Include="LexicalAnalyzer\LexicalAnalysis.cs" />
     <Compile Include="LexicalAnalyzer\LexicalComponent.cs" />
@@ -56,5 +60,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -13,19 +13,26 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private int FinalPosition;
         private Category Category;
         private string Lexeme;
+        private ComponentType Type { get; set; }
 
-        public LexicalComponent(int lineNumber, int initialPosition, int finalPosition, Category category, string lexeme)
+        public LexicalComponent(int lineNumber, int initialPosition, int finalPosition, Category category, string lexeme, ComponentType type)
         {
             LineNumber = lineNumber;
             InitialPosition = initialPosition;
             FinalPosition = finalPosition;
             Category = category;
             Lexeme = lexeme;
+            Type = type;
         }
 
-        public static LexicalComponent Create(int lineNumber, int initialPosition, int finalPosition, Category category, string lexeme)
+        public static LexicalComponent CreateNormalComponent(int lineNumber, int initialPosition, int finalPosition, Category category, string lexeme)
         {
-            return new LexicalComponent(lineNumber, initialPosition, finalPosition, category, lexeme);
+            return new LexicalComponent(lineNumber, initialPosition, finalPosition, category, lexeme, ComponentType.NORMAL);
+        }
+
+        public static LexicalComponent CreateDummyComponent(int lineNumber, int initialPosition, int finalPosition, Category category, string lexeme)
+        {
+            return new LexicalComponent(lineNumber, initialPosition, finalPosition, category, lexeme, ComponentType.DUMMY);
         }
 
         public void SetLineNumber(int lineNumber)
@@ -81,6 +88,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
         public string ToString()
         {
             StringBuilder sb = new StringBuilder();
+            sb.Append("Tipo: ").Append(Type).Append("\n");
             sb.Append("Categoría: ").Append(GetCategory()).Append("\n");
             sb.Append("Lexema: ").Append(GetLexeme()).Append("\n");
             sb.Append("Numero de Linea: ").Append(GetLineNumber()).Append("\n");

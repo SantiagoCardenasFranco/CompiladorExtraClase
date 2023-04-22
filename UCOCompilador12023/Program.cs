@@ -13,7 +13,7 @@ namespace UCOCompilador12023
         static void Main(string[] args)
         {
             // Precarga de datos
-            Cache.AddLine(Line.Create(1, "(PGJ)* a + 2345,9"));
+            Cache.AddLine(Line.Create(1, "(PGJ)* a + 2345, 9"));
             Cache.AddLine(Line.Create(2, "    4567         - Otra"));
             Cache.AddLine(Line.Create(3, ""));
             Cache.AddLine(Line.Create(4, "final"));
