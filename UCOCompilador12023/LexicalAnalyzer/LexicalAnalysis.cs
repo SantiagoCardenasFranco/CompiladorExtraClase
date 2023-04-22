@@ -156,7 +156,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
                 {
                     ProcessState22();
                 }
-                if (INSTANCE.CurrentState == 23)
+                else if (INSTANCE.CurrentState == 23)
                 {
                     ProcessState23();
                 }
@@ -332,7 +332,6 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState0()
         {
             DevourBlankCharacter();
-
             if(IsLetter())
             {
                 Concanate();
@@ -406,7 +405,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
             else if (IsCurrency())
             {
                 Concanate();
-                INSTANCE.CurrentState = 57;
+                INSTANCE.CurrentState = 56;
             }
             else if (IsConcate())
             {
@@ -434,9 +433,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
             } 
             else
             {
-                //Error Stopper
                 INSTANCE.CurrentState = 36;
-                //IsError(Scanner.GetCurrentCharacter(), "Esperaba un valor del compilador no el siguiente caracter ");
             }
         }
 
@@ -557,6 +554,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
 
         private static void ProcessState14()
         {
+            Scanner.ReadNextCharacter();
             if (IsY())
             {
                 Concanate();
@@ -595,6 +593,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
 
         private static void ProcessState15()
         {
+            Scanner.ReadNextCharacter();
             if (IsAtSign())
             {
                 Concanate();
@@ -614,6 +613,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
 
         private static void ProcessState18()
         {
+            Scanner.ReadNextCharacter();
             if (IsAtSign())
             {
                 Concanate();
@@ -639,6 +639,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
 
         private static void ProcessState21()
         {
+            Scanner.ReadNextCharacter();
             if (IsEqual())
             {
                 Concanate();
@@ -646,6 +647,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
             }
             else if(IsGreaterThan()) 
             {
+                Concanate();
                 INSTANCE.CurrentState = 52;
             }
             else
@@ -656,10 +658,11 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState22()
         {
             //Retorno menor que, devuelve puntero
-            CreateComponentWithoutReturningIndex(Category.MENOR_QUE, ComponentType.NORMAL);
+            CreateComponentReturningIndex(Category.MENOR_QUE, ComponentType.NORMAL);
         }
         private static void ProcessState23()
         {
+            Scanner.ReadNextCharacter();
             if (IsEqual())
             {
                 Concanate();
@@ -674,19 +677,19 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState24()
         {
             //Retorno mayor que, devuelve puntero
-            CreateComponentWithoutReturningIndex(Category.MAYOR_QUE, ComponentType.NORMAL);
+            CreateComponentReturningIndex(Category.MAYOR_QUE, ComponentType.NORMAL);
         }
 
         private static void ProcessState25()
         {
             //Retorna o lógico
-            returnData();
-            INSTANCE.CurrentState = 0; 
+            CreateComponentWithoutReturningIndex(Category.O, ComponentType.NORMAL);
         }
 
         private static void ProcessState26()
         {
-            if(IsEqual())
+            Scanner.ReadNextCharacter();
+            if (IsEqual())
             {
                 Concanate();
                 INSTANCE.CurrentState = 58;
@@ -700,19 +703,18 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState27()
         {
             //Retorna asignación, devuelve puntero
-            returnData();
-            INSTANCE.CurrentState = 0;
+            CreateComponentReturningIndex(Category.ASIGNACION, ComponentType.NORMAL);
         }
 
         private static void ProcessState28()
         {
             //Retorno menor o igual
-            returnData();
-            INSTANCE.CurrentState = 0;
+            CreateComponentWithoutReturningIndex(Category.MENOR_IGUAL_QUE, ComponentType.NORMAL);
         }
 
         private static void ProcessState29()
         {
+            Scanner.ReadNextCharacter();
             if (IsI())
             {
                 Concanate();
@@ -726,6 +728,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
 
         private static void ProcessState30()
         {
+            Scanner.ReadNextCharacter();
             if (IsQuotationMarks())
             {
                 Concanate();
@@ -749,6 +752,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
 
         private static void ProcessState31()
         {
+            Scanner.ReadNextCharacter();
             //Se come los comentarios?
             if (IsComment())
             {
@@ -764,6 +768,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
 
         private static void ProcessState32()
         {
+            Scanner.ReadNextCharacter();
             if (IsEndLine())
             {
                 Concanate();
@@ -783,6 +788,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
 
         private static void ProcessState33()
         {
+            Scanner.ReadNextCharacter();
             if (IsEndLine())
             {
                 Concanate();
@@ -802,6 +808,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
 
         private static void ProcessState34()
         {
+            Scanner.ReadNextCharacter();
             if (IsEndLine())
             {
                 Concanate();
@@ -817,13 +824,12 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState35()
         {
             //Retorna cadena de texto
-            returnData();
-            INSTANCE.CurrentState = 35;
+            CreateComponentWithoutReturningIndex(Category.CADENA_DE_TEXTO, ComponentType.NORMAL);
         }
 
         private static void ProcessState36()
         {
-            //Retorna error
+            //Retorna error stopper
             //IsError(Scanner.GetCurrentCharacter(), "Esperaba un valor del compilador no el siguiente caracter ");
         }
 
@@ -835,6 +841,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
 
         private static void ProcessState38()
         {
+            Scanner.ReadNextCharacter();
             if (IsAtSign())
             {
                 Concanate();
@@ -854,12 +861,12 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState39()
         {
             //Retorno si lógico
-            returnData();
-            INSTANCE.CurrentState = 0;
+            CreateComponentWithoutReturningIndex(Category.SI, ComponentType.NORMAL);
         }
 
         private static void ProcessState42()
         {
+            Scanner.ReadNextCharacter();
             if (IsO())
             {
                 Concanate();
@@ -873,6 +880,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
 
         private static void ProcessState43()
         {
+            Scanner.ReadNextCharacter();
             if (IsAtSign())
             {
                 Concanate();
@@ -887,12 +895,12 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState44()
         {
             //Retorno sino lógico
-            returnData();
-            INSTANCE.CurrentState = 0;
+            CreateComponentWithoutReturningIndex(Category.SINO, ComponentType.NORMAL);
         }
 
         private static void ProcessState45()
         {
+            Scanner.ReadNextCharacter();
             if (IsI())
             {
                 Concanate();
@@ -906,6 +914,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
 
         private static void ProcessState46()
         {
+            Scanner.ReadNextCharacter();
             if (IsN())
             {
                 Concanate();
@@ -919,6 +928,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
 
         private static void ProcessState47()
         {
+            Scanner.ReadNextCharacter();
             if (IsS())
             {
                 Concanate();
@@ -932,6 +942,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
 
         private static void ProcessState48()
         {
+            Scanner.ReadNextCharacter();
             if (IsI())
             {
                 Concanate();
@@ -945,6 +956,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
 
         private static void ProcessState49()
         {
+            Scanner.ReadNextCharacter();
             if (IsAtSign())
             {
                 Concanate();
@@ -965,26 +977,25 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState51()
         {
             //Retorna mayor o igual
-            returnData();
-            INSTANCE.CurrentState = 0;
+            CreateComponentWithoutReturningIndex(Category.MAYOR_IGUAL_QUE, ComponentType.NORMAL);
         }
 
         private static void ProcessState52()
         {
             //Retorna diferente que
-            returnData();
-            INSTANCE.CurrentState = 0;
+            CreateComponentWithoutReturningIndex(Category.DIFERENTE_QUE, ComponentType.NORMAL);
+
         }
 
         private static void ProcessState53()
         {
             //Retorna fin si lógico
-            returnData();
-            INSTANCE.CurrentState = 0;
+            CreateComponentWithoutReturningIndex(Category.FINSI, ComponentType.NORMAL);
         }
 
         private static void ProcessState55()
         {
+            Scanner.ReadNextCharacter();
             if (IsN())
             {
                 Concanate();
@@ -1003,6 +1014,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
 
         private static void ProcessState56()
         {
+            Scanner.ReadNextCharacter();
             if (IsCurrency())
             {
                 Concanate();
@@ -1018,19 +1030,18 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState57()
         {
             //Retorna nombre del programa
-            returnData();
-            INSTANCE.CurrentState = 0;
+            CreateComponentWithoutReturningIndex(Category.NOMBREPROGRAMA, ComponentType.NORMAL);
         }
 
         private static void ProcessState58()
         {
             //Retorna igual que
-            returnData();
-            INSTANCE.CurrentState = 0;
+            CreateComponentWithoutReturningIndex(Category.IGUAL_QUE, ComponentType.NORMAL);
         }
 
         private static void ProcessState59()
         {
+            Scanner.ReadNextCharacter();
             if (IsT())
             {
                 Concanate();
@@ -1044,6 +1055,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
 
         private static void ProcessState60()
         {
+            Scanner.ReadNextCharacter();
             if (IsO())
             {
                 Concanate();
@@ -1057,6 +1069,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
 
         private static void ProcessState61()
         {
+            Scanner.ReadNextCharacter();
             if (IsN())
             {
                 Concanate();
@@ -1070,6 +1083,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
 
         private static void ProcessState62()
         {
+            Scanner.ReadNextCharacter();
             if (IsC())
             {
                 Concanate();
@@ -1083,6 +1097,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
 
         private static void ProcessState63()
         {
+            Scanner.ReadNextCharacter();
             if (IsE())
             {
                 Concanate();
@@ -1096,6 +1111,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
 
         private static void ProcessState64()
         {
+            Scanner.ReadNextCharacter();
             if (IsS())
             {
                 Concanate();
@@ -1109,6 +1125,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
 
         private static void ProcessState65()
         {
+            Scanner.ReadNextCharacter();
             if (IsAtSign())
             {
                 Concanate();
@@ -1123,12 +1140,12 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState66()
         {
             //Retorna entonces lógico
-            Concanate();
-            INSTANCE.CurrentState = 0;
+            CreateComponentWithoutReturningIndex(Category.ENTONCES, ComponentType.NORMAL);
         }
 
         private static void ProcessState69()
         {
+            Scanner.ReadNextCharacter();
             if (IsC())
             {
                 Concanate();
