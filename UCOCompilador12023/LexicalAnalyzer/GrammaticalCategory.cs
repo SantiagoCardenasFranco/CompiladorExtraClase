@@ -19,6 +19,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
         public static string PARENTESIS_CIERRA = ")";
         public static string PARENTESIS_ABRE = "(";
         public static string CADENA_DE_TEXTO = "\"";
+        public static string BARRA_INVESRA = "\\";
         public static string ASIGNACION = "=";
         public static string MAYOR_QUE = ">";
         public static string MENOR_QUE = "<";

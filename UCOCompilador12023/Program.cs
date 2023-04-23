@@ -17,8 +17,10 @@ namespace UCOCompilador12023
             Cache.AddLine(Line.Create(2, "(PGJ)* a + 2345, 9   / 5"));
             Cache.AddLine(Line.Create(3, "a = 1    a > b   a < c   d <> b  x <= y  w >= v  p == q"));
             Cache.AddLine(Line.Create(4, ""));
-            Cache.AddLine(Line.Create(5, "@y@ @o@ @si@ @sino@ @finsi@ @entonces@"));
-            Cache.AddLine(Line.Create(6, "final }"));
+            Cache.AddLine(Line.Create(5, "@y@ @o@ @si@ @sino@ @finsi@ @entonces@ @escriba@ @lea@"));
+            Cache.AddLine(Line.Create(6, "& #HGF3456"));
+            Cache.AddLine(Line.Create(7, " \"Hola \\\"\""));
+            Cache.AddLine(Line.Create(8, "final }"));
 
             Scanner.Initialize();
             Scanner.ReadNextCharacter();

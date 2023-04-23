@@ -30,6 +30,13 @@ namespace UCOCompilador12023.LexicalAnalyzer
             INSTANCE.Continue = true;
         }
 
+        private static void Restart(int state)
+        {
+            INSTANCE.CurrentState = state;
+            INSTANCE.Lexeme = "";
+            INSTANCE.Continue = true;
+        }
+
         private static void Concanate()
         {
             INSTANCE.Lexeme = INSTANCE.Lexeme + Scanner.GetCurrentCharacter();
@@ -323,6 +330,190 @@ namespace UCOCompilador12023.LexicalAnalyzer
                 else if (INSTANCE.CurrentState == 69)
                 {
                     ProcessState69();
+                }
+                else if (INSTANCE.CurrentState == 70)
+                {
+                    ProcessState70();
+                }
+                else if (INSTANCE.CurrentState == 71)
+                {
+                    ProcessState71();
+                }
+                else if (INSTANCE.CurrentState == 72)
+                {
+                    ProcessState72();
+                }
+                else if (INSTANCE.CurrentState == 73)
+                {
+                    ProcessState73();
+                }
+                else if (INSTANCE.CurrentState == 74)
+                {
+                    ProcessState74();
+                }
+                else if (INSTANCE.CurrentState == 75)
+                {
+                    ProcessState75();
+                }
+                else if (INSTANCE.CurrentState == 77)
+                {
+                    ProcessState77();
+                }
+                else if (INSTANCE.CurrentState == 78)
+                {
+                    ProcessState78();
+                }
+                else if (INSTANCE.CurrentState == 79)
+                {
+                    ProcessState79();
+                }
+                else if(INSTANCE.CurrentState == 80)
+                {
+                    ProcessState80();
+                }
+                else if (INSTANCE.CurrentState == 81)
+                {
+                    ProcessState81();
+                }
+                else if (INSTANCE.CurrentState == 82)
+                {
+                    ProcessState82();
+                }
+                else if (INSTANCE.CurrentState == 83)
+                {
+                    ProcessState83();
+                }
+                else if (INSTANCE.CurrentState == 84)
+                {
+                    ProcessState84();
+                }
+                else if (INSTANCE.CurrentState == 85)
+                {
+                    ProcessState85();
+                }
+                else if (INSTANCE.CurrentState == 86)
+                {
+                    ProcessState86();
+                }
+                else if (INSTANCE.CurrentState == 87)
+                {
+                    ProcessState87();
+                }
+                else if (INSTANCE.CurrentState == 88)
+                {
+                    ProcessState88();
+                }
+                else if (INSTANCE.CurrentState == 89)
+                {
+                    ProcessState89();
+                }
+                else if (INSTANCE.CurrentState == 90)
+                {
+                    ProcessState90();
+                }
+                else if (INSTANCE.CurrentState == 91)
+                {
+                    ProcessState91();
+                }
+                else if (INSTANCE.CurrentState == 92)
+                {
+                    ProcessState92();
+                }
+                else if (INSTANCE.CurrentState == 93)
+                {
+                    ProcessState93();
+                }
+                else if (INSTANCE.CurrentState == 94)
+                {
+                    ProcessState94();
+                }
+                else if (INSTANCE.CurrentState == 95)
+                {
+                    ProcessState95();
+                }
+                else if (INSTANCE.CurrentState == 96)
+                {
+                    ProcessState96();
+                }
+                else if (INSTANCE.CurrentState == 97)
+                {
+                    ProcessState97();
+                }
+                else if (INSTANCE.CurrentState == 98)
+                {
+                    ProcessState98();
+                }
+                else if (INSTANCE.CurrentState == 99)
+                {
+                    ProcessState99();
+                }
+                else if (INSTANCE.CurrentState == 100)
+                {
+                    ProcessState100();
+                }
+                else if (INSTANCE.CurrentState == 101)
+                {
+                    ProcessState101();
+                }
+                else if (INSTANCE.CurrentState == 102)
+                {
+                    ProcessState102();
+                }
+                else if (INSTANCE.CurrentState == 103)
+                {
+                    ProcessState103();
+                }
+                else if (INSTANCE.CurrentState == 104)
+                {
+                    ProcessState104();
+                }
+                else if (INSTANCE.CurrentState == 106)
+                {
+                    ProcessState106();
+                }
+                else if (INSTANCE.CurrentState == 107)
+                {
+                    ProcessState107();
+                }
+                else if (INSTANCE.CurrentState == 108)
+                {
+                    ProcessState108();
+                }
+                else if (INSTANCE.CurrentState == 109)
+                {
+                    ProcessState109();
+                }
+                else if (INSTANCE.CurrentState == 110)
+                {
+                    ProcessState110();
+                }
+                else if (INSTANCE.CurrentState == 111)
+                {
+                    ProcessState111();
+                }
+                else if (INSTANCE.CurrentState == 112)
+                {
+                    ProcessState112();
+                }
+                else if (INSTANCE.CurrentState == 113)
+                {
+                    ProcessState113();
+                }
+                else if (INSTANCE.CurrentState == 114)
+                {
+                    ProcessState114();
+                }
+                else if (INSTANCE.CurrentState == 115)
+                {
+                    ProcessState115();
+                }
+                else if (INSTANCE.CurrentState == 116)
+                {
+                    ProcessState116();
+                }
+                else if (INSTANCE.CurrentState == 117)
+                {
+                    ProcessState117();
                 }
             }
 
@@ -734,7 +925,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
                 Concanate();
                 INSTANCE.CurrentState = 35;
             }
-            else if (IsDivision())
+            else if (IsBackSlash())
             {
                 Concanate();
                 INSTANCE.CurrentState = 85;
@@ -791,7 +982,6 @@ namespace UCOCompilador12023.LexicalAnalyzer
             Scanner.ReadNextCharacter();
             if (IsEndLine())
             {
-                Concanate();
                 INSTANCE.CurrentState = 83;
             }
             else if (IsComment())
@@ -811,7 +1001,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
             Scanner.ReadNextCharacter();
             if (IsEndLine())
             {
-                Concanate();
+                CreateComponentWithoutReturningIndex(Category.COMENTARIO_UNA_LINEA, ComponentType.NORMAL);
                 INSTANCE.CurrentState = 19;
             }
             else
@@ -1020,6 +1210,10 @@ namespace UCOCompilador12023.LexicalAnalyzer
                 Concanate();
                 INSTANCE.CurrentState = 57;
             }
+            else if (IsEndLine())
+            {
+                INSTANCE.CurrentState = 115;
+            }
             else
             {
                 Concanate();
@@ -1157,11 +1351,414 @@ namespace UCOCompilador12023.LexicalAnalyzer
             }
         }
 
+        private static void ProcessState70()
+        {
+            Scanner.ReadNextCharacter();
+            if (IsR())
+            {
+                Concanate();
+                INSTANCE.CurrentState = 71;
+            }
+            else
+            {
+                INSTANCE.CurrentState = 107;
+            }
+        }
+
+        private static void ProcessState71()
+        {
+            Scanner.ReadNextCharacter();
+            if (IsI())
+            {
+                Concanate();
+                INSTANCE.CurrentState = 72;
+            }
+            else
+            {
+                INSTANCE.CurrentState = 108;
+            }
+        }
+
+        private static void ProcessState72()
+        {
+            Scanner.ReadNextCharacter();
+            if (IsB())
+            {
+                Concanate();
+                INSTANCE.CurrentState = 73;
+            }
+            else
+            {
+                INSTANCE.CurrentState = 109;
+            }
+        }
+
+        private static void ProcessState73()
+        {
+            Scanner.ReadNextCharacter();
+            if (IsA())
+            {
+                Concanate();
+                INSTANCE.CurrentState = 74;
+            }
+            else
+            {
+                INSTANCE.CurrentState = 110;
+            }
+        }
+
+        private static void ProcessState74()
+        {
+            Scanner.ReadNextCharacter();
+            if (IsAtSign())
+            {
+                Concanate();
+                INSTANCE.CurrentState = 75;
+            }
+            else
+            {
+                INSTANCE.CurrentState = 111;
+            }
+        }
+
+        private static void ProcessState75()
+        {
+            //Retorna imprima
+            CreateComponentWithoutReturningIndex(Category.IMPRIMA, ComponentType.NORMAL);
+        }
+
+        private static void ProcessState77()
+        {
+            Scanner.ReadNextCharacter();
+            if (IsE())
+            {
+                Concanate();
+                INSTANCE.CurrentState = 78;
+            }
+            else
+            {
+                INSTANCE.CurrentState = 112;
+            }
+        }
+
+        private static void ProcessState78()
+        {
+            Scanner.ReadNextCharacter();
+            if (IsA())
+            {
+                Concanate();
+                INSTANCE.CurrentState = 79;
+            }
+            else
+            {
+                INSTANCE.CurrentState = 113;
+            }
+        }
+
+        private static void ProcessState79()
+        {
+            Scanner.ReadNextCharacter();
+            if (IsAtSign())
+            {
+                Concanate();
+                INSTANCE.CurrentState = 80;
+            }
+            else
+            {
+                INSTANCE.CurrentState = 114;
+            }
+        }
+
+        private static void ProcessState80()
+        {
+            //Retorna input
+            CreateComponentWithoutReturningIndex(Category.INPUT, ComponentType.NORMAL);
+        }
+
+        private static void ProcessState81()
+        {
+            //Retorna concatenación
+            CreateComponentWithoutReturningIndex(Category.CONCATENACION, ComponentType.NORMAL);
+        }
+
+        //Revisar--------------------------------------------------------------------------------------------
+        private static void ProcessState82()
+        {
+            //Error no condición competa
+            Concanate("y");
+            CreateComponentReturningIndex(Category.Y, ComponentType.DUMMY);
+        }
+
+        private static void ProcessState83()
+        {
+            Scanner.LoadNextLine();
+            Restart(33);
+        }
+
+        private static void ProcessState84()
+        {
+            Scanner.ReadNextCharacter();
+            if (IsBackSlash())
+            {
+                Concanate();
+                INSTANCE.CurrentState = 85;
+            }
+            else if (IsQuotationMarks())
+            {
+                Concanate();
+                INSTANCE.CurrentState = 35;
+            }
+            else if (IsEndLine())
+            {
+                INSTANCE.CurrentState = 117;
+            }
+            else
+            {
+                Concanate();
+                INSTANCE.CurrentState = 30;
+            }
+        }
+
+        private static void ProcessState85()
+        {
+            Scanner.ReadNextCharacter();
+            if (IsBackSlash())
+            {
+                Concanate();
+                INSTANCE.CurrentState = 85;
+            }
+            else if (IsQuotationMarks())
+            {
+                Concanate();
+                INSTANCE.CurrentState = 84;
+            }
+            else if (IsEndLine())
+            {
+                INSTANCE.CurrentState = 117;
+            }
+            else
+            {
+                Concanate();
+                INSTANCE.CurrentState = 30;
+            }
+        }
+
+        private static void ProcessState86()
+        {
+            //Error no condición competa
+            Concanate("@");
+            CreateComponentReturningIndex(Category.Y, ComponentType.DUMMY);
+        }
+
+        private static void ProcessState87()
+        {
+            //Error no condición competa
+            Concanate("@");
+            CreateComponentReturningIndex(Category.O, ComponentType.DUMMY);
+        }
+
+        private static void ProcessState88()
+        {
+            //Error no condición competa
+            Concanate("i");
+            CreateComponentWithoutReturningIndex(Category.SINO, ComponentType.DUMMY);
+        }
+
+        private static void ProcessState89()
+        {
+            //Error no condición competa
+            Concanate("n");
+            CreateComponentWithoutReturningIndex(Category.SINO, ComponentType.DUMMY);
+        }
+
+        private static void ProcessState90()
+        {
+            //Error no condición competa
+            Concanate("o");
+            CreateComponentWithoutReturningIndex(Category.SINO, ComponentType.DUMMY);
+        }
+
+        private static void ProcessState91()
+        {
+            //Error no condición competa
+            Concanate("@");
+            CreateComponentWithoutReturningIndex(Category.SINO, ComponentType.DUMMY);
+        }
+
+        private static void ProcessState92()
+        {
+            //Error no condición competa
+            Concanate("i");
+            CreateComponentWithoutReturningIndex(Category.FINSI, ComponentType.DUMMY);
+        }
+
+        private static void ProcessState93()
+        {
+            //Error no condición competa
+            Concanate("n");
+            CreateComponentWithoutReturningIndex(Category.FINSI, ComponentType.DUMMY);
+        }
+
+        private static void ProcessState94()
+        {
+            //Error no condición competa
+            Concanate("s");
+            CreateComponentWithoutReturningIndex(Category.FINSI, ComponentType.DUMMY);
+        }
+
+        private static void ProcessState95()
+        {
+            //Error no condición competa
+            Concanate("i");
+            CreateComponentWithoutReturningIndex(Category.FINSI, ComponentType.DUMMY);
+        }
+
+        private static void ProcessState96()
+        {
+            //Error no condición competa
+            Concanate("@");
+            CreateComponentWithoutReturningIndex(Category.FINSI, ComponentType.DUMMY);
+        }
+
+        //Revisar ---------------------------------------------------------------------------------------
+        private static void ProcessState97()
+        {
+            //Error no condición competa
+            Concanate("n");
+            //CreateComponentReturningIndex(Category.FINSI, ComponentType.DUMMY);
+        }
+
+        private static void ProcessState98()
+        {
+            //Error no condición competa
+            Concanate("t");
+            CreateComponentWithoutReturningIndex(Category.ENTONCES, ComponentType.DUMMY);
+        }
+
+        private static void ProcessState99()
+        {
+            //Error no condición competa
+            Concanate("o");
+            CreateComponentWithoutReturningIndex(Category.ENTONCES, ComponentType.DUMMY);
+        }
+
+        private static void ProcessState100()
+        {
+            //Error no condición competa
+            Concanate("n");
+            CreateComponentWithoutReturningIndex(Category.ENTONCES, ComponentType.DUMMY);
+        }
+
+        private static void ProcessState101()
+        {
+            //Error no condición competa
+            Concanate("c");
+            CreateComponentWithoutReturningIndex(Category.ENTONCES, ComponentType.DUMMY);
+        }
 
 
+        private static void ProcessState102()
+        {
+            //Error no condición competa
+            Concanate("e");
+            CreateComponentWithoutReturningIndex(Category.ENTONCES, ComponentType.DUMMY);
+        }
+        private static void ProcessState103()
+        {
+            //Error no condición competa
+            Concanate("s");
+            CreateComponentWithoutReturningIndex(Category.ENTONCES, ComponentType.DUMMY);
+        }
+        private static void ProcessState104()
+        {
+            //Error no condición competa
+            Concanate("@");
+            CreateComponentWithoutReturningIndex(Category.ENTONCES, ComponentType.DUMMY);
+        }
 
+        private static void ProcessState106()
+        {
+            //Error no condición competa
+            Concanate("c");
+            CreateComponentWithoutReturningIndex(Category.IMPRIMA, ComponentType.DUMMY);
+        }
 
+        private static void ProcessState107()
+        {
+            //Error no condición competa
+            Concanate("r");
+            CreateComponentWithoutReturningIndex(Category.IMPRIMA, ComponentType.DUMMY);
+        }
 
+        private static void ProcessState108()
+        {
+            //Error no condición competa
+            Concanate("i");
+            CreateComponentWithoutReturningIndex(Category.IMPRIMA, ComponentType.DUMMY);
+        }
+
+        private static void ProcessState109()
+        {
+            //Error no condición competa
+            Concanate("b");
+            CreateComponentWithoutReturningIndex(Category.IMPRIMA, ComponentType.DUMMY);
+        }
+
+        private static void ProcessState110()
+        {
+            //Error no condición competa
+            Concanate("a");
+            CreateComponentWithoutReturningIndex(Category.IMPRIMA, ComponentType.DUMMY);
+        }
+
+        private static void ProcessState111()
+        {
+            //Error no condición competa
+            Concanate("@");
+            CreateComponentWithoutReturningIndex(Category.IMPRIMA, ComponentType.DUMMY);
+        }
+
+        private static void ProcessState112()
+        {
+            //Error no condición competa
+            Concanate("e");
+            CreateComponentWithoutReturningIndex(Category.INPUT, ComponentType.DUMMY);
+        }
+
+        private static void ProcessState113()
+        {
+            //Error no condición competa
+            Concanate("a");
+            CreateComponentWithoutReturningIndex(Category.INPUT, ComponentType.DUMMY);
+        }
+
+        private static void ProcessState114()
+        {
+            //Error no condición competa
+            Concanate("@");
+            CreateComponentWithoutReturningIndex(Category.INPUT, ComponentType.DUMMY);
+        }
+
+        private static void ProcessState115()
+        {
+            //Error no condición competa
+            Concanate("$");
+            CreateComponentWithoutReturningIndex(Category.NOMBREPROGRAMA, ComponentType.DUMMY);
+        }
+
+        private static void ProcessState116()
+        {
+            Scanner.LoadNextLine();
+            Restart(32);
+        }
+
+        private static void ProcessState117()
+        {
+            Concanate("");
+            CreateComponentWithoutReturningIndex(Category.CADENA_DE_TEXTO, ComponentType.DUMMY);
+        }
+
+        //Revisar 117 y 115
 
         private static void CreateComponent(Category category, ComponentType type)
         {
@@ -1230,6 +1827,11 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static bool IsDivision()
         {
             return GrammaticalCategory.DIVISION.Equals(Scanner.GetCurrentCharacter());
+        }
+
+        private static bool IsBackSlash()
+        {
+            return GrammaticalCategory.BARRA_INVESRA.Equals(Scanner.GetCurrentCharacter());
         }
 
         private static bool IsOpenparenthesis()
@@ -1333,6 +1935,21 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static bool IsL()
         {
             return "l".Equals(Scanner.GetCurrentCharacter());
+        }
+
+        private static bool IsR()
+        {
+            return "r".Equals(Scanner.GetCurrentCharacter());
+        }
+
+        private static bool IsB()
+        {
+            return "b".Equals(Scanner.GetCurrentCharacter());
+        }
+
+        private static bool IsA()
+        {
+            return "a".Equals(Scanner.GetCurrentCharacter());
         }
 
         private static bool IsI()
