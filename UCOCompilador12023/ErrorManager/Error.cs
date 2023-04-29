@@ -7,7 +7,7 @@ using UCOCompilador12023.LexicalAnalyzer;
 
 namespace UCOCompilador12023.ErrorManager
 {
-    class Error
+    public class Error
     {
         private int LineNumber;
         private int InitialPosition;

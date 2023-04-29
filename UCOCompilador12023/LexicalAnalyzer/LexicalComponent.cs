@@ -13,7 +13,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private int FinalPosition;
         private Category Category;
         private string Lexeme;
-        private ComponentType Type { get; set; }
+        private ComponentType componentType { get; set; }
 
         public LexicalComponent(int lineNumber, int initialPosition, int finalPosition, Category category, string lexeme, ComponentType type)
         {
@@ -22,7 +22,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
             FinalPosition = finalPosition;
             Category = category;
             Lexeme = lexeme;
-            Type = type;
+            componentType = type;
         }
 
         public static LexicalComponent CreateNormalComponent(int lineNumber, int initialPosition, int finalPosition, Category category, string lexeme)
@@ -33,6 +33,16 @@ namespace UCOCompilador12023.LexicalAnalyzer
         public static LexicalComponent CreateDummyComponent(int lineNumber, int initialPosition, int finalPosition, Category category, string lexeme)
         {
             return new LexicalComponent(lineNumber, initialPosition, finalPosition, category, lexeme, ComponentType.DUMMY);
+        }
+
+        public static LexicalComponent CreatePalabraReservadaComponent(int lineNumber, int initialPosition, int finalPosition, Category category, string lexeme)
+        {
+            return new LexicalComponent(lineNumber, initialPosition, finalPosition, category, lexeme, ComponentType.PALABRA_RESERVADA);
+        }
+
+        public static LexicalComponent CreateLiteralComponent(int lineNumber, int initialPosition, int finalPosition, Category category, string lexeme)
+        {
+            return new LexicalComponent(lineNumber, initialPosition, finalPosition, category, lexeme, ComponentType.LITERAL);
         }
 
         public void SetLineNumber(int lineNumber)
@@ -88,7 +98,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
         public string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("Tipo: ").Append(Type).Append("\n");
+            sb.Append("Tipo: ").Append(componentType).Append("\n");
             sb.Append("Categoría: ").Append(GetCategory()).Append("\n");
             sb.Append("Lexema: ").Append(GetLexeme()).Append("\n");
             sb.Append("Numero de Linea: ").Append(GetLineNumber()).Append("\n");

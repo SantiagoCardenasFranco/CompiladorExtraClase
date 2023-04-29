@@ -7,6 +7,7 @@ using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using UCOCompilador12023.DataCache;
+using UCOCompilador12023.ErrorManager;
 
 namespace UCOCompilador12023.LexicalAnalyzer
 {
@@ -709,8 +710,16 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState8()
         {
             //Error no decimal competo
+            string fail = "Número decimal no válido...";
+            string cause = "Se ha recibido un caracter que no corresponde a un digito";
+            string solution = "Asegúrese de que luego del separador decimal, contiene un dígito";
+            CreateLexicalError(ErrorType.CONTROLABLE, fail, cause, solution, Category.DECIMAL, 
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
+
             Concanate("0");
             CreateComponentReturningIndex(Category.DECIMAL, ComponentType.DUMMY);
+
+
         }
 
         private static void ProcessState9()
@@ -1020,7 +1029,12 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState36()
         {
             //Retorna error stopper
-            //IsError(Scanner.GetCurrentCharacter(), "Esperaba un valor del compilador no el siguiente caracter ");
+            string fail = "Componente léxico no válido...";
+            string cause = "Se ha recibido un simbolo desconocido por el lenguaje...";
+            string solution = "Asegúrese de que solo existan símbolos aceptados por el lenguaje.";
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
+
         }
 
         private static void ProcessState37()
@@ -1742,6 +1756,13 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState115()
         {
             //Error no condición competa
+            string fail = "Acción no permitida, caracter no valido...";
+            string cause = "Se ha recibido un caracter que no corresponde a un nombre del programa";
+            string solution = "Asegúrese de que luego del simbolo de pesos vaya cualquier elemento a excepción de un salto de linea";
+            CreateLexicalError(ErrorType.CONTROLABLE, fail, cause, solution, Category.NOMBREPROGRAMA,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
+
+
             Concanate("$");
             CreateComponentWithoutReturningIndex(Category.NOMBREPROGRAMA, ComponentType.DUMMY);
         }
@@ -1754,7 +1775,13 @@ namespace UCOCompilador12023.LexicalAnalyzer
 
         private static void ProcessState117()
         {
-            Concanate("");
+            string fail = "Acción no permitida, caracter no valido...";
+            string cause = "Se ha recibido un caracter que no corresponde a una cadena de texto";
+            string solution = "Asegúrese de que luego de la comillas vaya cualquier elemneto a excepción de un salto de linea";
+            CreateLexicalError(ErrorType.CONTROLABLE, fail, cause, solution, Category.CADENA_DE_TEXTO,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
+
+            Concanate("\"");
             CreateComponentWithoutReturningIndex(Category.CADENA_DE_TEXTO, ComponentType.DUMMY);
         }
 
@@ -1774,6 +1801,38 @@ namespace UCOCompilador12023.LexicalAnalyzer
             else if(ComponentType.DUMMY.Equals(type))
             {
                 INSTANCE.Component = LexicalComponent.CreateDummyComponent(lineNumber, initialPosition, finalPosition, category, INSTANCE.Lexeme);
+            }
+        }
+
+        private static void CreateLexicalError(ErrorType errorType, string fail, string cause, string solution, Category expectedCategory, string lexema)
+        {
+            int lineNumber = Scanner.GetCurrentNumberLine();
+
+
+            Error error;
+
+            if (ErrorType.STOPPER.Equals(errorType))
+            {
+                int finalPosition = Scanner.GetCurrentIndex() - 1;
+                int initialPosition = Scanner.GetCurrentIndex() - 1;
+                error = Error.CreateStopperLexicalError(lineNumber, initialPosition, 
+                    finalPosition, fail, cause, solution, expectedCategory, 
+                    lexema);
+
+                ErrorManagement.Agregar(error);
+                throw new Exception("Se ha presentado un error tipo STOPPER durante el análisis léxico " +
+                    "No es posible continuar con el proceso de compilación hasta que el error haya sido " +
+                    "solucionado. Por favor verifique la consola de errores para tener más detalle del" +
+                    "problema que se ha presentado ");
+            }
+            else if (ErrorType.CONTROLABLE.Equals(errorType))
+            {
+                int finalPosition = Scanner.GetCurrentIndex() - INSTANCE.Lexeme.Length;
+                int initialPosition = Scanner.GetCurrentIndex() - 1;
+                error = Error.CreateNoStopperLexicalError(lineNumber, initialPosition,
+                    finalPosition, fail, cause, solution, expectedCategory,
+                    lexema);
+                ErrorManagement.Agregar(error);
             }
         }
 
