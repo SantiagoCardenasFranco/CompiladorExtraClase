@@ -102,7 +102,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
             sb.Append("Categoría: ").Append(GetCategory()).Append("\n");
             sb.Append("Lexema: ").Append(GetLexeme()).Append("\n");
             sb.Append("Numero de Linea: ").Append(GetLineNumber()).Append("\n");
-            sb.Append("Posicion de linea: ").Append(GetInitialPosition()).Append("\n");
+            sb.Append("Posicion Inicial: ").Append(GetInitialPosition()).Append("\n");
             sb.Append("Posicion Final: ").Append(GetFinalPosition()).Append("\n");
 
             return sb.ToString();

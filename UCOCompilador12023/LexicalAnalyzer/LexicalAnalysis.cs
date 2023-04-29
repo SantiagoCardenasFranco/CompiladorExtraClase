@@ -1560,12 +1560,25 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState86()
         {
             //Error no condición competa
+            string fail = "Valor \"y\" lógico no válido...";
+            string cause = "Se ha recibido un caracter que no corresponde a un \"y\"";
+            string solution = "Asegúrese de que luego de @y, contiene un @";
+            CreateLexicalError(ErrorType.CONTROLABLE, fail, cause, solution, Category.Y,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
+
             Concanate("@");
             CreateComponentReturningIndex(Category.Y, ComponentType.DUMMY);
         }
 
         private static void ProcessState87()
         {
+            //Error no condición competa
+            string fail = "Valor \"o\" lógico no válido...";
+            string cause = "Se ha recibido un caracter que no corresponde a un \"o\"";
+            string solution = "Asegúrese de que luego de @o, contiene un @";
+            CreateLexicalError(ErrorType.CONTROLABLE, fail, cause, solution, Category.O,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
+
             //Error no condición competa
             Concanate("@");
             CreateComponentReturningIndex(Category.O, ComponentType.DUMMY);
@@ -1827,8 +1840,8 @@ namespace UCOCompilador12023.LexicalAnalyzer
             }
             else if (ErrorType.CONTROLABLE.Equals(errorType))
             {
-                int finalPosition = Scanner.GetCurrentIndex() - INSTANCE.Lexeme.Length;
-                int initialPosition = Scanner.GetCurrentIndex() - 1;
+                int finalPosition = Scanner.GetCurrentIndex() - 1;
+                int initialPosition = Scanner.GetCurrentIndex() - INSTANCE.Lexeme.Length;
                 error = Error.CreateNoStopperLexicalError(lineNumber, initialPosition,
                     finalPosition, fail, cause, solution, expectedCategory,
                     lexema);
