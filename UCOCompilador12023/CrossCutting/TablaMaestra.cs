@@ -37,7 +37,7 @@ namespace UCOCompilador12023.CrossCutting
             {
                 component = TablaPalabrasReservadas.ComprobarComponent(component);
 
-                //TABLAS[component.GetType].Add(component);
+                TABLAS[component.componentType].Add(component);
             }
         }
 

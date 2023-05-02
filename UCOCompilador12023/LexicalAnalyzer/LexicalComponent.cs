@@ -13,7 +13,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private int FinalPosition;
         private Category Category;
         private string Lexeme;
-        private ComponentType componentType { get; set; }
+        public ComponentType componentType { get; set; }
 
         public LexicalComponent(int lineNumber, int initialPosition, int finalPosition, Category category, string lexeme, ComponentType type)
         {

@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
+using UCOCompilador12023.CrossCutting;
 using UCOCompilador12023.DataCache;
 using UCOCompilador12023.ErrorManager;
 
@@ -22,6 +23,8 @@ namespace UCOCompilador12023.LexicalAnalyzer
         public static void Initialize()
         {
             Scanner.Initialize();
+            TablaMaestra.Inicializar();
+            ErrorManagement.Inicializar();
         }
 
         private static void Restart()
@@ -517,6 +520,8 @@ namespace UCOCompilador12023.LexicalAnalyzer
                     ProcessState117();
                 }
             }
+
+            TablaMaestra.Add(INSTANCE.Component);
 
             return INSTANCE.Component;
         }
