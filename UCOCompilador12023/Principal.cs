@@ -1,36 +1,86 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using UCOCompilador12023.CrossCutting;
 using UCOCompilador12023.DataCache;
 using UCOCompilador12023.ErrorManager;
 using UCOCompilador12023.LexicalAnalyzer;
-using System.Windows.Forms;
 
 namespace UCOCompilador12023
 {
-    class Program
+    public partial class Principal : Form
     {
-        [STAThread]
-        static void Main(string[] args)
+        public Principal()
+        {
+            InitializeComponent();
+        }
+
+        private void Buscar_Click(object sender, EventArgs e)
+        {
+            url.Text = ObtainUrl();
+            if (url.Text.Contains(".XML") || url.Text.Contains(".xml") || url.Text.Contains(".html") || url.Text.Contains(".txt"))
+            {
+                StreamReader lector;
+                try
+                {
+                    lector = File.OpenText(url.Text);
+                    List<string> Lineas = new List<string>();
+                    while (!lector.EndOfStream)
+                    {
+                        Lineas.Add(lector.ReadLine());
+                    }
+                    info.Lines = Lineas.ToArray();
+                }
+                catch (ArgumentException exp)
+                {
+                    Console.WriteLine("La ruta no debe estar vacia", exp.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Esta extensión no está permitida");
+                url.Clear();
+            }
+        }
+
+        private String ObtainUrl()
+        {
+            string path = string.Empty;
+            OpenFileDialog dialog = new OpenFileDialog();
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                path = dialog.FileName;
+
+            }
+            return path;
+        }
+
+        private void Limpiar_Click(object sender, EventArgs e)
+        {
+            url.Clear();
+            info.Clear();
+        }
+
+        private void info_TextChanged(object sender, EventArgs e)
         {
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Principal());
-            /*
-            // Precarga de datos
-            //Cache.AddLine(Line.Create(1, "$HolaMundo$  {"));
-            Cache.AddLine(Line.Create(1, "(PGJ2)* a + 2345,a 9  ~  / 5"));
-            //Cache.AddLine(Line.Create(3, "a = 1    a > b   a < c   d <> b  x <= y  w >= v  p == q"));
-            //Cache.AddLine(Line.Create(4, ""));
-            //Cache.AddLine(Line.Create(5, "@y@ @o@ @si@ @sino@ @finsi@ @entonces@ @escriba@ @lea@"));
-            ///Cache.AddLine(Line.Create(6, "& #HGF3456"));
-            //Cache.AddLine(Line.Create(7, " \"Hola \\\"\""));
-            //Cache.AddLine(Line.Create(8, "final }"));
+        }
 
+        private void Compilar_Click(object sender, EventArgs e)
+        {
+            for(int i=1; i<info.Lines.Length; i++)
+            {
+                Cache.AddLine(Line.Create(i, info.Lines.ToString()));
+            }
             LexicalAnalysis.Initialize();
 
             try
@@ -55,14 +105,14 @@ namespace UCOCompilador12023
                 {
                     Console.WriteLine(component.ToString());
                 }
-                
+
             }
             catch (Exception ex)
             {
                 Console.WriteLine("¡¡¡ERROR DE COMPILACIÓN!!!");
                 Console.WriteLine(ex.Message);
             }
-            if(TablaMaestra.GetComponentsAsList(ComponentType.NORMAL).Count > 0)
+            if (TablaMaestra.GetComponentsAsList(ComponentType.NORMAL).Count > 0)
             {
                 Console.WriteLine("Simbolos: ");
                 foreach (LexicalComponent componentTmp in TablaMaestra.GetComponentsAsList(ComponentType.NORMAL))
@@ -101,7 +151,7 @@ namespace UCOCompilador12023
                     Console.WriteLine(componentTmp.ToString());
 
                 }
-            }                
+            }
 
             if (ErrorManagement.HayErrores())
             {
@@ -115,12 +165,11 @@ namespace UCOCompilador12023
                     Console.WriteLine("_________________________________________________________________");
                 }
             }
- 
 
-           
 
-            Console.ReadKey();*/
 
+
+            Console.ReadKey();
         }
     }
 }

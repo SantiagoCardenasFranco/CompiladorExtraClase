@@ -13,3 +13,6 @@ C:\Users\Usuario\Desktop\Compiladores\ExtraClase\CompiladorExtraClase\UCOCompila
 C:\Users\Usuario\Desktop\Compiladores\ExtraClase\CompiladorExtraClase\UCOCompilador12023\obj\Debug\UCOCompilador12023.csproj.CoreCompileInputs.cache
 C:\Users\Usuario\Desktop\Compiladores\ExtraClase\CompiladorExtraClase\UCOCompilador12023\obj\Debug\UCOCompilador12023.exe
 C:\Users\Usuario\Desktop\Compiladores\ExtraClase\CompiladorExtraClase\UCOCompilador12023\obj\Debug\UCOCompilador12023.pdb
+C:\Users\Usuario\Desktop\Compiladores\ExtraClase\CompiladorExtraClase\UCOCompilador12023\obj\Debug\UCOCompilador12023.csproj.GenerateResource.cache
+C:\Users\Usuario\Desktop\Compiladores\ExtraClase\CompiladorExtraClase\UCOCompilador12023\obj\Debug\UCOCompilador12023.Principal.resources
+C:\Users\Usuario\Desktop\Compiladores\ExtraClase\CompiladorExtraClase\UCOCompilador12023\obj\Debug\UCOCompilador12023.ErrorTabla.resources
