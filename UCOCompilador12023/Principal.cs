@@ -77,9 +77,11 @@ namespace UCOCompilador12023
 
         private void Compilar_Click(object sender, EventArgs e)
         {
-            for(int i=1; i<info.Lines.Length; i++)
+            int index = 1;
+            foreach(var linea in info.Lines)
             {
-                Cache.AddLine(Line.Create(i, info.Lines.ToString()));
+                Cache.AddLine(Line.Create(index, linea));
+                index++;
             }
             LexicalAnalysis.Initialize();
 
@@ -90,20 +92,6 @@ namespace UCOCompilador12023
                 while (!Category.FIN_DE_ARCHIVO.Equals(component.GetCategory()))
                 {
                     component = LexicalAnalysis.Analyze();
-                    //if ("@FL@".Equals(Scanner.GetCurrentCharacter()))
-                    //{
-                    //    Scanner.LoadNextLine();
-                    //} 
-                    //else 
-                    //{ 
-                    //    Console.WriteLine(Scanner.GetCurrentCharacter());
-                    //    Scanner.ReadNextCharacter();
-                    //}
-                }
-
-                if (Category.FIN_DE_ARCHIVO.Equals(component.GetCategory()))
-                {
-                    Console.WriteLine(component.ToString());
                 }
 
             }
@@ -122,7 +110,7 @@ namespace UCOCompilador12023
 
                 }
             }
-            else if (TablaMaestra.GetComponentsAsList(ComponentType.LITERAL).Count > 0)
+            if (TablaMaestra.GetComponentsAsList(ComponentType.LITERAL).Count > 0)
             {
                 Console.WriteLine("Literales: ");
                 foreach (LexicalComponent componentTmp in TablaMaestra.GetComponentsAsList(ComponentType.LITERAL))
@@ -132,7 +120,7 @@ namespace UCOCompilador12023
 
                 }
             }
-            else if (TablaMaestra.GetComponentsAsList(ComponentType.PALABRA_RESERVADA).Count > 0)
+            if (TablaMaestra.GetComponentsAsList(ComponentType.PALABRA_RESERVADA).Count > 0)
             {
                 Console.WriteLine("Palabras reservadas: ");
                 foreach (LexicalComponent componentTmp in TablaMaestra.GetComponentsAsList(ComponentType.PALABRA_RESERVADA))
@@ -142,7 +130,7 @@ namespace UCOCompilador12023
 
                 }
             }
-            else if (TablaMaestra.GetComponentsAsList(ComponentType.DUMMY).Count > 0)
+            if (TablaMaestra.GetComponentsAsList(ComponentType.DUMMY).Count > 0)
             {
                 Console.WriteLine("Dummies: ");
                 foreach (LexicalComponent componentTmp in TablaMaestra.GetComponentsAsList(ComponentType.DUMMY))
@@ -170,6 +158,11 @@ namespace UCOCompilador12023
 
 
             Console.ReadKey();
+        }
+
+        private void tablaDePalbrasReservadasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

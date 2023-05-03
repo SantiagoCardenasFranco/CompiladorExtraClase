@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.Remoting.Contexts;
@@ -813,7 +814,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState16()
         {
             //Retorno y lógico
-            CreateComponentWithoutReturningIndex(Category.Y, ComponentType.NORMAL);
+            CreateComponentWithoutReturningIndex(Category.Y, ComponentType.PALABRA_RESERVADA);
         }
 
         private static void ProcessState18()
@@ -888,7 +889,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState25()
         {
             //Retorna o lógico
-            CreateComponentWithoutReturningIndex(Category.O, ComponentType.NORMAL);
+            CreateComponentWithoutReturningIndex(Category.O, ComponentType.PALABRA_RESERVADA);
         }
 
         private static void ProcessState26()
@@ -1070,7 +1071,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState39()
         {
             //Retorno si lógico
-            CreateComponentWithoutReturningIndex(Category.SI, ComponentType.NORMAL);
+            CreateComponentWithoutReturningIndex(Category.SI, ComponentType.PALABRA_RESERVADA);
         }
 
         private static void ProcessState42()
@@ -1104,7 +1105,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState44()
         {
             //Retorno sino lógico
-            CreateComponentWithoutReturningIndex(Category.SINO, ComponentType.NORMAL);
+            CreateComponentWithoutReturningIndex(Category.SINO, ComponentType.PALABRA_RESERVADA);
         }
 
         private static void ProcessState45()
@@ -1199,7 +1200,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState53()
         {
             //Retorna fin si lógico
-            CreateComponentWithoutReturningIndex(Category.FINSI, ComponentType.NORMAL);
+            CreateComponentWithoutReturningIndex(Category.FINSI, ComponentType.PALABRA_RESERVADA);
         }
 
         private static void ProcessState55()
@@ -1353,7 +1354,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState66()
         {
             //Retorna entonces lógico
-            CreateComponentWithoutReturningIndex(Category.ENTONCES, ComponentType.NORMAL);
+            CreateComponentWithoutReturningIndex(Category.ENTONCES, ComponentType.PALABRA_RESERVADA);
         }
 
         private static void ProcessState69()
@@ -1443,7 +1444,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState75()
         {
             //Retorna imprima
-            CreateComponentWithoutReturningIndex(Category.IMPRIMA, ComponentType.NORMAL);
+            CreateComponentWithoutReturningIndex(Category.IMPRIMA, ComponentType.PALABRA_RESERVADA);
         }
 
         private static void ProcessState77()
@@ -1491,7 +1492,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState80()
         {
             //Retorna input
-            CreateComponentWithoutReturningIndex(Category.INPUT, ComponentType.NORMAL);
+            CreateComponentWithoutReturningIndex(Category.INPUT, ComponentType.PALABRA_RESERVADA);
         }
 
         private static void ProcessState81()
@@ -1504,8 +1505,15 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState82()
         {
             //Error no condición competa
-            Concanate("y");
-            CreateComponentReturningIndex(Category.Y, ComponentType.DUMMY);
+            if(INSTANCE.Lexeme != "@y" || INSTANCE.Lexeme != "@o" || INSTANCE.Lexeme != "@s"
+                || INSTANCE.Lexeme != "@f" || INSTANCE.Lexeme != "@e" || INSTANCE.Lexeme != "@l")
+            {
+                string fail = "Componente léxico no válido...";
+                string cause = "Se ha recibido un simbolo desconocido por el lenguaje...";
+                string solution = "Asegúrese de que solo existan símbolos aceptados por el lenguaje.";
+                CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL,
+                    INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
+            }
         }
 
         private static void ProcessState83()
@@ -1568,11 +1576,11 @@ namespace UCOCompilador12023.LexicalAnalyzer
             string fail = "Valor \"y\" lógico no válido...";
             string cause = "Se ha recibido un caracter que no corresponde a un \"y\"";
             string solution = "Asegúrese de que luego de @y, contiene un @";
-            CreateLexicalError(ErrorType.CONTROLABLE, fail, cause, solution, Category.Y,
-                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
+            CreateLexicalErrorPalabraReservada(ErrorType.CONTROLABLE, fail, cause, solution, Category.Y,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter(), INSTANCE.Lexeme.Length +1);
 
             Concanate("@");
-            CreateComponentReturningIndex(Category.Y, ComponentType.DUMMY);
+            CreateComponentReturningIndex(Category.Y, ComponentType.PALABRA_RESERVADA);
         }
 
         private static void ProcessState87()
@@ -1581,194 +1589,264 @@ namespace UCOCompilador12023.LexicalAnalyzer
             string fail = "Valor \"o\" lógico no válido...";
             string cause = "Se ha recibido un caracter que no corresponde a un \"o\"";
             string solution = "Asegúrese de que luego de @o, contiene un @";
-            CreateLexicalError(ErrorType.CONTROLABLE, fail, cause, solution, Category.O,
-                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
+            CreateLexicalErrorPalabraReservada(ErrorType.CONTROLABLE, fail, cause, solution, Category.O,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter(), INSTANCE.Lexeme.Length + 1);
 
             //Error no condición competa
             Concanate("@");
-            CreateComponentReturningIndex(Category.O, ComponentType.DUMMY);
+            CreateComponentReturningIndex(Category.O, ComponentType.PALABRA_RESERVADA);
         }
 
         private static void ProcessState88()
         {
-            //Error no condición competa
-            Concanate("i");
-            CreateComponentWithoutReturningIndex(Category.SINO, ComponentType.DUMMY);
+            string fail = "Componente léxico no válido...";
+            string cause = "Se ha recibido un simbolo desconocido por el lenguaje...";
+            string solution = "Asegúrese de que solo existan símbolos aceptados por el lenguaje.";
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
 
         private static void ProcessState89()
         {
-            //Error no condición competa
-            Concanate("n");
-            CreateComponentWithoutReturningIndex(Category.SINO, ComponentType.DUMMY);
+            string fail = "Componente léxico no válido...";
+            string cause = "Se ha recibido un simbolo desconocido por el lenguaje...";
+            string solution = "Asegúrese de que solo existan símbolos aceptados por el lenguaje.";
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
 
         private static void ProcessState90()
         {
-            //Error no condición competa
-            Concanate("o");
-            CreateComponentWithoutReturningIndex(Category.SINO, ComponentType.DUMMY);
+            string fail = "Componente léxico no válido...";
+            string cause = "Se ha recibido un simbolo desconocido por el lenguaje...";
+            string solution = "Asegúrese de que solo existan símbolos aceptados por el lenguaje.";
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
 
         private static void ProcessState91()
         {
+            string fail = "Valor \"sino\" lógico no válido...";
+            string cause = "Se ha recibido un caracter que no corresponde a un \"sino\"";
+            string solution = "Asegúrese de que luego de @sino, contiene un @";
+            CreateLexicalErrorPalabraReservada(ErrorType.CONTROLABLE, fail, cause, solution, Category.SINO,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter(), INSTANCE.Lexeme.Length + 1);
             //Error no condición competa
             Concanate("@");
-            CreateComponentWithoutReturningIndex(Category.SINO, ComponentType.DUMMY);
+            CreateComponentWithoutReturningIndex(Category.SINO, ComponentType.PALABRA_RESERVADA);
         }
 
         private static void ProcessState92()
         {
-            //Error no condición competa
-            Concanate("i");
-            CreateComponentWithoutReturningIndex(Category.FINSI, ComponentType.DUMMY);
+            string fail = "Componente léxico no válido...";
+            string cause = "Se ha recibido un simbolo desconocido por el lenguaje...";
+            string solution = "Asegúrese de que solo existan símbolos aceptados por el lenguaje.";
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
 
         private static void ProcessState93()
         {
-            //Error no condición competa
-            Concanate("n");
-            CreateComponentWithoutReturningIndex(Category.FINSI, ComponentType.DUMMY);
+            string fail = "Componente léxico no válido...";
+            string cause = "Se ha recibido un simbolo desconocido por el lenguaje...";
+            string solution = "Asegúrese de que solo existan símbolos aceptados por el lenguaje.";
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
 
         private static void ProcessState94()
         {
-            //Error no condición competa
-            Concanate("s");
-            CreateComponentWithoutReturningIndex(Category.FINSI, ComponentType.DUMMY);
+            string fail = "Componente léxico no válido...";
+            string cause = "Se ha recibido un simbolo desconocido por el lenguaje...";
+            string solution = "Asegúrese de que solo existan símbolos aceptados por el lenguaje.";
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
 
         private static void ProcessState95()
         {
-            //Error no condición competa
-            Concanate("i");
-            CreateComponentWithoutReturningIndex(Category.FINSI, ComponentType.DUMMY);
+            string fail = "Componente léxico no válido...";
+            string cause = "Se ha recibido un simbolo desconocido por el lenguaje...";
+            string solution = "Asegúrese de que solo existan símbolos aceptados por el lenguaje.";
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
 
         private static void ProcessState96()
         {
             //Error no condición competa
+            string fail = "Valor \"finsi\" lógico no válido...";
+            string cause = "Se ha recibido un caracter que no corresponde a un \finsi\"";
+            string solution = "Asegúrese de que luego de @finsi, contiene un @";
+            CreateLexicalErrorPalabraReservada(ErrorType.CONTROLABLE, fail, cause, solution, Category.FINSI,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter(), INSTANCE.Lexeme.Length + 1);
+
+            //Error no condición competa
             Concanate("@");
-            CreateComponentWithoutReturningIndex(Category.FINSI, ComponentType.DUMMY);
+            CreateComponentReturningIndex(Category.FINSI, ComponentType.PALABRA_RESERVADA);
         }
 
         //Revisar ---------------------------------------------------------------------------------------
         private static void ProcessState97()
         {
-            //Error no condición competa
-            Concanate("n");
-            //CreateComponentReturningIndex(Category.FINSI, ComponentType.DUMMY);
+            string fail = "Componente léxico no válido...";
+            string cause = "Se ha recibido un simbolo desconocido por el lenguaje...";
+            string solution = "Asegúrese de que solo existan símbolos aceptados por el lenguaje.";
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
 
         private static void ProcessState98()
         {
-            //Error no condición competa
-            Concanate("t");
-            CreateComponentWithoutReturningIndex(Category.ENTONCES, ComponentType.DUMMY);
+            string fail = "Componente léxico no válido...";
+            string cause = "Se ha recibido un simbolo desconocido por el lenguaje...";
+            string solution = "Asegúrese de que solo existan símbolos aceptados por el lenguaje.";
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
 
         private static void ProcessState99()
         {
-            //Error no condición competa
-            Concanate("o");
-            CreateComponentWithoutReturningIndex(Category.ENTONCES, ComponentType.DUMMY);
+            string fail = "Componente léxico no válido...";
+            string cause = "Se ha recibido un simbolo desconocido por el lenguaje...";
+            string solution = "Asegúrese de que solo existan símbolos aceptados por el lenguaje.";
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
 
         private static void ProcessState100()
         {
-            //Error no condición competa
-            Concanate("n");
-            CreateComponentWithoutReturningIndex(Category.ENTONCES, ComponentType.DUMMY);
+            string fail = "Componente léxico no válido...";
+            string cause = "Se ha recibido un simbolo desconocido por el lenguaje...";
+            string solution = "Asegúrese de que solo existan símbolos aceptados por el lenguaje.";
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
 
         private static void ProcessState101()
         {
-            //Error no condición competa
-            Concanate("c");
-            CreateComponentWithoutReturningIndex(Category.ENTONCES, ComponentType.DUMMY);
+            string fail = "Componente léxico no válido...";
+            string cause = "Se ha recibido un simbolo desconocido por el lenguaje...";
+            string solution = "Asegúrese de que solo existan símbolos aceptados por el lenguaje.";
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
 
 
         private static void ProcessState102()
         {
-            //Error no condición competa
-            Concanate("e");
-            CreateComponentWithoutReturningIndex(Category.ENTONCES, ComponentType.DUMMY);
+            string fail = "Componente léxico no válido...";
+            string cause = "Se ha recibido un simbolo desconocido por el lenguaje...";
+            string solution = "Asegúrese de que solo existan símbolos aceptados por el lenguaje.";
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
         private static void ProcessState103()
         {
-            //Error no condición competa
-            Concanate("s");
-            CreateComponentWithoutReturningIndex(Category.ENTONCES, ComponentType.DUMMY);
+            string fail = "Componente léxico no válido...";
+            string cause = "Se ha recibido un simbolo desconocido por el lenguaje...";
+            string solution = "Asegúrese de que solo existan símbolos aceptados por el lenguaje.";
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
         private static void ProcessState104()
         {
-            //Error no condición competa
+            string fail = "Valor \"entonces\" lógico no válido...";
+            string cause = "Se ha recibido un caracter que no corresponde a un \"entonces\"";
+            string solution = "Asegúrese de que luego de @entonces, contiene un @";
+            CreateLexicalErrorPalabraReservada(ErrorType.CONTROLABLE, fail, cause, solution, Category.ENTONCES,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter(), INSTANCE.Lexeme.Length + 1);
+
             Concanate("@");
-            CreateComponentWithoutReturningIndex(Category.ENTONCES, ComponentType.DUMMY);
+            CreateComponentWithoutReturningIndex(Category.ENTONCES, ComponentType.PALABRA_RESERVADA);
         }
 
         private static void ProcessState106()
         {
-            //Error no condición competa
-            Concanate("c");
-            CreateComponentWithoutReturningIndex(Category.IMPRIMA, ComponentType.DUMMY);
+            string fail = "Componente léxico no válido...";
+            string cause = "Se ha recibido un simbolo desconocido por el lenguaje...";
+            string solution = "Asegúrese de que solo existan símbolos aceptados por el lenguaje.";
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
 
         private static void ProcessState107()
         {
-            //Error no condición competa
-            Concanate("r");
-            CreateComponentWithoutReturningIndex(Category.IMPRIMA, ComponentType.DUMMY);
+            string fail = "Componente léxico no válido...";
+            string cause = "Se ha recibido un simbolo desconocido por el lenguaje...";
+            string solution = "Asegúrese de que solo existan símbolos aceptados por el lenguaje.";
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
 
         private static void ProcessState108()
         {
-            //Error no condición competa
-            Concanate("i");
-            CreateComponentWithoutReturningIndex(Category.IMPRIMA, ComponentType.DUMMY);
+            string fail = "Componente léxico no válido...";
+            string cause = "Se ha recibido un simbolo desconocido por el lenguaje...";
+            string solution = "Asegúrese de que solo existan símbolos aceptados por el lenguaje.";
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
 
         private static void ProcessState109()
         {
-            //Error no condición competa
-            Concanate("b");
-            CreateComponentWithoutReturningIndex(Category.IMPRIMA, ComponentType.DUMMY);
+            string fail = "Componente léxico no válido...";
+            string cause = "Se ha recibido un simbolo desconocido por el lenguaje...";
+            string solution = "Asegúrese de que solo existan símbolos aceptados por el lenguaje.";
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
 
         private static void ProcessState110()
         {
-            //Error no condición competa
-            Concanate("a");
-            CreateComponentWithoutReturningIndex(Category.IMPRIMA, ComponentType.DUMMY);
+            string fail = "Componente léxico no válido...";
+            string cause = "Se ha recibido un simbolo desconocido por el lenguaje...";
+            string solution = "Asegúrese de que solo existan símbolos aceptados por el lenguaje.";
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
 
         private static void ProcessState111()
         {
+            string fail = "Valor \"imprima\" lógico no válido...";
+            string cause = "Se ha recibido un caracter que no corresponde a un \"imprima\"";
+            string solution = "Asegúrese de que luego de @escriba, contiene un @";
+            CreateLexicalErrorPalabraReservada(ErrorType.CONTROLABLE, fail, cause, solution, Category.IMPRIMA,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter(), INSTANCE.Lexeme.Length + 1);
+
             //Error no condición competa
             Concanate("@");
-            CreateComponentWithoutReturningIndex(Category.IMPRIMA, ComponentType.DUMMY);
+            CreateComponentWithoutReturningIndex(Category.IMPRIMA, ComponentType.PALABRA_RESERVADA);
         }
 
         private static void ProcessState112()
         {
-            //Error no condición competa
-            Concanate("e");
-            CreateComponentWithoutReturningIndex(Category.INPUT, ComponentType.DUMMY);
+            string fail = "Componente léxico no válido...";
+            string cause = "Se ha recibido un simbolo desconocido por el lenguaje...";
+            string solution = "Asegúrese de que solo existan símbolos aceptados por el lenguaje.";
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
 
         private static void ProcessState113()
         {
-            //Error no condición competa
-            Concanate("a");
-            CreateComponentWithoutReturningIndex(Category.INPUT, ComponentType.DUMMY);
+            string fail = "Componente léxico no válido...";
+            string cause = "Se ha recibido un simbolo desconocido por el lenguaje...";
+            string solution = "Asegúrese de que solo existan símbolos aceptados por el lenguaje.";
+            CreateLexicalError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
         }
 
         private static void ProcessState114()
         {
+            string fail = "Valor \"lea\" lógico no válido...";
+            string cause = "Se ha recibido un caracter que no corresponde a un \"lea\"";
+            string solution = "Asegúrese de que luego de @lea, contiene un @";
+            CreateLexicalErrorPalabraReservada(ErrorType.CONTROLABLE, fail, cause, solution, Category.INPUT,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter(), INSTANCE.Lexeme.Length + 1);
             //Error no condición competa
             Concanate("@");
-            CreateComponentWithoutReturningIndex(Category.INPUT, ComponentType.DUMMY);
+            CreateComponentWithoutReturningIndex(Category.INPUT, ComponentType.PALABRA_RESERVADA);
         }
 
         private static void ProcessState115()
@@ -1808,17 +1886,26 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void CreateComponent(Category category, ComponentType type)
         {
             int lineNumber = Scanner.GetCurrentNumberLine();
-            int finalPosition = Scanner.GetCurrentIndex() - 1;
-            int initialPosition = Scanner.GetCurrentIndex() - INSTANCE.Lexeme.Length;
-
+            
             if (ComponentType.NORMAL.Equals(type))
             {
+                int finalPosition = Scanner.GetCurrentIndex() - 1;
+                int initialPosition = Scanner.GetCurrentIndex() - INSTANCE.Lexeme.Length;
                 INSTANCE.Component = LexicalComponent.CreateNormalComponent(lineNumber, initialPosition, finalPosition, category, INSTANCE.Lexeme);
 
             }
             else if(ComponentType.DUMMY.Equals(type))
             {
+                int finalPosition = Scanner.GetCurrentIndex() - 1;
+                int initialPosition = Scanner.GetCurrentIndex() - INSTANCE.Lexeme.Length + 1;
                 INSTANCE.Component = LexicalComponent.CreateDummyComponent(lineNumber, initialPosition, finalPosition, category, INSTANCE.Lexeme);
+            }
+            else if (ComponentType.PALABRA_RESERVADA.Equals(type))
+            {
+                int finalPosition = Scanner.GetCurrentIndex() - 1;
+                int initialPosition = Scanner.GetCurrentIndex() - INSTANCE.Lexeme.Length;
+                INSTANCE.Component = LexicalComponent.CreatePalabraReservadaComponent(lineNumber, initialPosition, finalPosition, category, INSTANCE.Lexeme);
+
             }
         }
 
@@ -1854,11 +1941,44 @@ namespace UCOCompilador12023.LexicalAnalyzer
             }
         }
 
+        private static void CreateLexicalErrorPalabraReservada(ErrorType errorType, string fail, string cause, string solution, Category expectedCategory, string lexema, int position)
+        {
+            int lineNumber = Scanner.GetCurrentNumberLine();
+
+
+            Error error;
+
+            if (ErrorType.STOPPER.Equals(errorType))
+            {
+                int finalPosition = Scanner.GetCurrentIndex() - 1;
+                int initialPosition = Scanner.GetCurrentIndex() - 1;
+                error = Error.CreateStopperLexicalError(lineNumber, initialPosition,
+                    finalPosition, fail, cause, solution, expectedCategory,
+                    lexema);
+
+                ErrorManagement.Agregar(error);
+                throw new Exception("Se ha presentado un error tipo STOPPER durante el análisis léxico " +
+                    "No es posible continuar con el proceso de compilación hasta que el error haya sido " +
+                    "solucionado. Por favor verifique la consola de errores para tener más detalle del" +
+                    "problema que se ha presentado ");
+            }
+            else if (ErrorType.CONTROLABLE.Equals(errorType))
+            {
+                int finalPosition = Scanner.GetCurrentIndex() - 1;
+                int initialPosition = Scanner.GetCurrentIndex() - position;
+                error = Error.CreateNoStopperLexicalError(lineNumber, initialPosition,
+                    finalPosition, fail, cause, solution, expectedCategory,
+                    lexema);
+                ErrorManagement.Agregar(error);
+            }
+        }
         private static void CreateComponentWithoutReturningIndex(Category category, ComponentType type)
         {
             INSTANCE.Continue = false;
             CreateComponent(category, type);
         }
+
+
 
 
         private static void CreateComponentReturningIndex(Category category, ComponentType type)
