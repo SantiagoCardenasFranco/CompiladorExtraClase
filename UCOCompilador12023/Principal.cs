@@ -87,13 +87,11 @@ namespace UCOCompilador12023
 
             try
             {
-
                 LexicalComponent component = LexicalAnalysis.Analyze();
                 while (!Category.FIN_DE_ARCHIVO.Equals(component.GetCategory()))
                 {
                     component = LexicalAnalysis.Analyze();
                 }
-
             }
             catch (Exception ex)
             {
@@ -120,20 +118,20 @@ namespace UCOCompilador12023
 
                 }
             }
-            if (TablaMaestra.GetComponentsAsList(ComponentType.PALABRA_RESERVADA).Count > 0)
+            if (TablaMaestra.GetComponentsAsList(ComponentType.DUMMY).Count > 0)
             {
-                Console.WriteLine("Palabras reservadas: ");
-                foreach (LexicalComponent componentTmp in TablaMaestra.GetComponentsAsList(ComponentType.PALABRA_RESERVADA))
+                Console.WriteLine("Dummies: ");
+                foreach (LexicalComponent componentTmp in TablaMaestra.GetComponentsAsList(ComponentType.DUMMY))
                 {
                     Console.WriteLine("=======================================================");
                     Console.WriteLine(componentTmp.ToString());
 
                 }
             }
-            if (TablaMaestra.GetComponentsAsList(ComponentType.DUMMY).Count > 0)
+            if (TablaMaestra.GetComponentsAsList(ComponentType.PALABRA_RESERVADA).Count > 0)
             {
-                Console.WriteLine("Dummies: ");
-                foreach (LexicalComponent componentTmp in TablaMaestra.GetComponentsAsList(ComponentType.DUMMY))
+                Console.WriteLine("Palabras reservadas: ");
+                foreach (LexicalComponent componentTmp in TablaMaestra.GetComponentsAsList(ComponentType.PALABRA_RESERVADA))
                 {
                     Console.WriteLine("=======================================================");
                     Console.WriteLine(componentTmp.ToString());
@@ -153,16 +151,49 @@ namespace UCOCompilador12023
                     Console.WriteLine("_________________________________________________________________");
                 }
             }
+        }
 
-
-
-
-            Console.ReadKey();
+        private void clearDataGrid(DataGridView dataGrid)
+        {
+            dataGrid.Rows.Clear();
         }
 
         private void tablaDePalbrasReservadasToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
+
+        private void tablaSimbolosButton_Click(object sender, EventArgs e)
+        {
+            tablaDummyGroupBox.Hide();
+            TablaLiteralesgroupBox.Hide();
+            TablaPalabrasResevadasgroupBox.Hide();
+            tablaSimbolosGroup.Show();
+
+            clearDataGrid(SimbolosdataGridView);
+            foreach (LexicalComponent componentTmp in TablaMaestra.GetComponentsAsList(ComponentType.NORMAL))
+            {
+                //Console.WriteLine("=======================================================");
+                //Console.WriteLine(componentTmp.ToString());
+                adicionarCeldaATablaSimbolos(componentTmp.GetLineNumber(), componentTmp.GetInitialPosition(),
+                    componentTmp.GetFinalPosition(), componentTmp.GetCategory(), componentTmp.GetLexeme());
+
+            }
+        }
+
+        private void adicionarCeldaATablaSimbolos(int numeroLinea, int posicionInicial, int posicionFinal, Category categoria, string lexema)
+        {
+            int numero = SimbolosdataGridView.Rows.Add();
+
+            SimbolosdataGridView.Rows[numero].Cells[0].Value = numeroLinea.ToString();
+            SimbolosdataGridView.Rows[numero].Cells[1].Value = posicionInicial.ToString();
+            SimbolosdataGridView.Rows[numero].Cells[2].Value = posicionFinal.ToString();
+            SimbolosdataGridView.Rows[numero].Cells[3].Value = categoria;
+            SimbolosdataGridView.Rows[numero].Cells[4].Value = lexema;
+        }
+
+
+
+
     }
 }
