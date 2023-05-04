@@ -16,5 +16,10 @@ namespace UCOCompilador12023
         {
             InitializeComponent();
         }
+
+        private void Tablas_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

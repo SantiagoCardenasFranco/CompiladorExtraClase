@@ -149,7 +149,15 @@ namespace UCOCompilador12023
                 {
                     Console.WriteLine(error.ToString());
                     Console.WriteLine("_________________________________________________________________");
-                }
+                    adicionarCeldaATablaErrores(error.GetType(), error.GetCause(), error.GetSolution(), error.GetExpectedCategory(), error.GetLineNumber(), 
+                        error.GetInitialPosition(), error.GetFinalPosition(), error.GetLexeme());
+
+               
+        
+
+
+
+                    }
             }
         }
 
@@ -180,7 +188,6 @@ namespace UCOCompilador12023
 
             }
         }
-
         private void adicionarCeldaATablaSimbolos(int numeroLinea, int posicionInicial, int posicionFinal, Category categoria, string lexema)
         {
             int numero = SimbolosdataGridView.Rows.Add();
@@ -192,8 +199,121 @@ namespace UCOCompilador12023
             SimbolosdataGridView.Rows[numero].Cells[4].Value = lexema;
         }
 
+        private void principalMenu_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tablaDummiesButton_Click(object sender, EventArgs e)
+        {
+            tablaDummyGroupBox.Show();
+            TablaLiteralesgroupBox.Hide();
+            TablaPalabrasResevadasgroupBox.Hide();
+            tablaSimbolosGroup.Hide();
+            clearDataGrid(dummiesDataGridView);
+            foreach (LexicalComponent componentTmp in TablaMaestra.GetComponentsAsList(ComponentType.DUMMY))
+            {
+                //Console.WriteLine("=======================================================");
+                //Console.WriteLine(componentTmp.ToString());
+                adicionarCeldaATablaDummies(componentTmp.GetLineNumber(), componentTmp.GetInitialPosition(),
+                    componentTmp.GetFinalPosition(), componentTmp.GetCategory(), componentTmp.GetLexeme());
+
+            }
+
+
+        }
+        private void adicionarCeldaATablaDummies(int numeroLinea, int posicionInicial, int posicionFinal, Category categoria, string lexema)
+        {
+            int numero = dummiesDataGridView.Rows.Add();
+
+            dummiesDataGridView.Rows[numero].Cells[0].Value = numeroLinea.ToString();
+            dummiesDataGridView.Rows[numero].Cells[1].Value = posicionInicial.ToString();
+            dummiesDataGridView.Rows[numero].Cells[2].Value = posicionFinal.ToString();
+            dummiesDataGridView.Rows[numero].Cells[3].Value = categoria;
+            dummiesDataGridView.Rows[numero].Cells[4].Value = lexema;
+        }
+
+        
+
+        private void tablaPalabrasReservadasButton_Click(object sender, EventArgs e)
+        {
+            tablaDummyGroupBox.Hide();
+            TablaLiteralesgroupBox.Hide();
+            TablaPalabrasResevadasgroupBox.Show();
+            tablaSimbolosGroup.Hide();
+
+            clearDataGrid(ReservadasdataGridView);
+            foreach (LexicalComponent componentTmp in TablaMaestra.GetComponentsAsList(ComponentType.PALABRA_RESERVADA))
+            {
+                //Console.WriteLine("=======================================================");
+                //Console.WriteLine(componentTmp.ToString());
+                adicionarCeldaATablaPalabrasReservadas(componentTmp.GetLineNumber(), componentTmp.GetInitialPosition(),
+                    componentTmp.GetFinalPosition(), componentTmp.GetCategory(), componentTmp.GetLexeme());
+
+            }
 
 
 
+        }
+
+        private void adicionarCeldaATablaPalabrasReservadas(int numeroLinea, int posicionInicial, int posicionFinal, Category categoria, string lexema)
+        {
+            int numero = ReservadasdataGridView.Rows.Add();
+
+            ReservadasdataGridView.Rows[numero].Cells[0].Value = numeroLinea.ToString();
+            ReservadasdataGridView.Rows[numero].Cells[1].Value = posicionInicial.ToString();
+            ReservadasdataGridView.Rows[numero].Cells[2].Value = posicionFinal.ToString();
+            ReservadasdataGridView.Rows[numero].Cells[3].Value = categoria;
+            ReservadasdataGridView.Rows[numero].Cells[4].Value = lexema;
+        }
+
+        private void tablaLiteralesButton_Click(object sender, EventArgs e)
+        {
+            tablaDummyGroupBox.Hide();
+            TablaLiteralesgroupBox.Show();
+            TablaPalabrasResevadasgroupBox.Hide();
+            tablaSimbolosGroup.Hide();
+
+            clearDataGrid(LiteralesdataGridView);
+            foreach (LexicalComponent componentTmp in TablaMaestra.GetComponentsAsList(ComponentType.LITERAL))
+            {
+
+                adicionarCeldaATablaLiterales(componentTmp.GetLineNumber(), componentTmp.GetInitialPosition(),
+                    componentTmp.GetFinalPosition(), componentTmp.GetCategory(), componentTmp.GetLexeme());
+
+            }
+
+
+        }
+
+        private void adicionarCeldaATablaLiterales (int numeroLinea, int posicionInicial, int posicionFinal, Category categoria, string lexema)
+        {
+            int numero = LiteralesdataGridView.Rows.Add();
+
+            LiteralesdataGridView.Rows[numero].Cells[0].Value = numeroLinea.ToString();
+            LiteralesdataGridView.Rows[numero].Cells[1].Value = posicionInicial.ToString();
+            LiteralesdataGridView.Rows[numero].Cells[2].Value = posicionFinal.ToString();
+            LiteralesdataGridView.Rows[numero].Cells[3].Value = categoria;
+            LiteralesdataGridView.Rows[numero].Cells[4].Value = lexema;
+        }
+
+
+
+        private void adicionarCeldaATablaErrores( ErrorType errorType,String cause,String solution,Category ExpectedCategory, int numeroLinea, int posicionInicial, int posicionFinal, string lexema)
+        {
+            clearDataGrid(ErrorDataGridVIew);
+            int numero = ErrorDataGridVIew.Rows.Add();
+
+            ErrorDataGridVIew.Rows[numero].Cells[0].Value = errorType;
+            ErrorDataGridVIew.Rows[numero].Cells[1].Value = cause;
+            ErrorDataGridVIew.Rows[numero].Cells[2].Value = solution;
+            ErrorDataGridVIew.Rows[numero].Cells[3].Value = ExpectedCategory;
+            ErrorDataGridVIew.Rows[numero].Cells[4].Value = lexema;
+            ErrorDataGridVIew.Rows[numero].Cells[5].Value = numeroLinea.ToString();
+            ErrorDataGridVIew.Rows[numero].Cells[6].Value = posicionInicial.ToString();
+            ErrorDataGridVIew.Rows[numero].Cells[7].Value = posicionFinal.ToString();
+        }
+
+       
     }
 }

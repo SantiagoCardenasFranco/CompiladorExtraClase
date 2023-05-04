@@ -16,3 +16,15 @@ C:\Users\Usuario\Desktop\Compiladores\ExtraClase\CompiladorExtraClase\UCOCompila
 C:\Users\Usuario\Desktop\Compiladores\ExtraClase\CompiladorExtraClase\UCOCompilador12023\obj\Debug\UCOCompilador12023.csproj.GenerateResource.cache
 C:\Users\Usuario\Desktop\Compiladores\ExtraClase\CompiladorExtraClase\UCOCompilador12023\obj\Debug\UCOCompilador12023.Principal.resources
 C:\Users\Usuario\Desktop\Compiladores\ExtraClase\CompiladorExtraClase\UCOCompilador12023\obj\Debug\UCOCompilador12023.ErrorTabla.resources
+C:\Users\mateo\OneDrive\Escritorio\proyectos\COMPILADORES\CompiladorExtraClase\UCOCompilador12023\bin\Debug\UCOCompilador12023.exe.config
+C:\Users\mateo\OneDrive\Escritorio\proyectos\COMPILADORES\CompiladorExtraClase\UCOCompilador12023\bin\Debug\UCOCompilador12023.exe
+C:\Users\mateo\OneDrive\Escritorio\proyectos\COMPILADORES\CompiladorExtraClase\UCOCompilador12023\bin\Debug\UCOCompilador12023.pdb
+C:\Users\mateo\OneDrive\Escritorio\proyectos\COMPILADORES\CompiladorExtraClase\UCOCompilador12023\obj\Debug\UCOCompilador12023.csproj.AssemblyReference.cache
+C:\Users\mateo\OneDrive\Escritorio\proyectos\COMPILADORES\CompiladorExtraClase\UCOCompilador12023\obj\Debug\UCOCompilador12023.csproj.SuggestedBindingRedirects.cache
+C:\Users\mateo\OneDrive\Escritorio\proyectos\COMPILADORES\CompiladorExtraClase\UCOCompilador12023\obj\Debug\UCOCompilador12023.ErrorTabla.resources
+C:\Users\mateo\OneDrive\Escritorio\proyectos\COMPILADORES\CompiladorExtraClase\UCOCompilador12023\obj\Debug\UCOCompilador12023.Principal.resources
+C:\Users\mateo\OneDrive\Escritorio\proyectos\COMPILADORES\CompiladorExtraClase\UCOCompilador12023\obj\Debug\UCOCompilador12023.Tablas.resources
+C:\Users\mateo\OneDrive\Escritorio\proyectos\COMPILADORES\CompiladorExtraClase\UCOCompilador12023\obj\Debug\UCOCompilador12023.csproj.GenerateResource.cache
+C:\Users\mateo\OneDrive\Escritorio\proyectos\COMPILADORES\CompiladorExtraClase\UCOCompilador12023\obj\Debug\UCOCompilador12023.csproj.CoreCompileInputs.cache
+C:\Users\mateo\OneDrive\Escritorio\proyectos\COMPILADORES\CompiladorExtraClase\UCOCompilador12023\obj\Debug\UCOCompilador12023.exe
+C:\Users\mateo\OneDrive\Escritorio\proyectos\COMPILADORES\CompiladorExtraClase\UCOCompilador12023\obj\Debug\UCOCompilador12023.pdb
