@@ -28,3 +28,4 @@ C:\Users\mateo\OneDrive\Escritorio\proyectos\COMPILADORES\CompiladorExtraClase\U
 C:\Users\mateo\OneDrive\Escritorio\proyectos\COMPILADORES\CompiladorExtraClase\UCOCompilador12023\obj\Debug\UCOCompilador12023.csproj.CoreCompileInputs.cache
 C:\Users\mateo\OneDrive\Escritorio\proyectos\COMPILADORES\CompiladorExtraClase\UCOCompilador12023\obj\Debug\UCOCompilador12023.exe
 C:\Users\mateo\OneDrive\Escritorio\proyectos\COMPILADORES\CompiladorExtraClase\UCOCompilador12023\obj\Debug\UCOCompilador12023.pdb
+C:\Users\Usuario\Desktop\Compiladores\ExtraClase\CompiladorExtraClase\UCOCompilador12023\obj\Debug\UCOCompilador12023.Tablas.resources

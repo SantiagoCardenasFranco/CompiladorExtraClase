@@ -115,18 +115,18 @@
             // 
             // info
             // 
-            this.info.Location = new System.Drawing.Point(300, 75);
+            this.info.Location = new System.Drawing.Point(222, 75);
             this.info.Multiline = true;
             this.info.Name = "info";
-            this.info.Size = new System.Drawing.Size(280, 220);
+            this.info.Size = new System.Drawing.Size(408, 220);
             this.info.TabIndex = 2;
             this.info.TextChanged += new System.EventHandler(this.info_TextChanged);
             // 
             // Limpiar
             // 
-            this.Limpiar.Location = new System.Drawing.Point(300, 311);
+            this.Limpiar.Location = new System.Drawing.Point(222, 311);
             this.Limpiar.Name = "Limpiar";
-            this.Limpiar.Size = new System.Drawing.Size(75, 23);
+            this.Limpiar.Size = new System.Drawing.Size(153, 33);
             this.Limpiar.TabIndex = 3;
             this.Limpiar.Text = "Limpiar";
             this.Limpiar.UseVisualStyleBackColor = true;
@@ -134,9 +134,9 @@
             // 
             // Compilar
             // 
-            this.Compilar.Location = new System.Drawing.Point(505, 311);
+            this.Compilar.Location = new System.Drawing.Point(474, 311);
             this.Compilar.Name = "Compilar";
-            this.Compilar.Size = new System.Drawing.Size(75, 23);
+            this.Compilar.Size = new System.Drawing.Size(156, 33);
             this.Compilar.TabIndex = 4;
             this.Compilar.Text = "Compilar";
             this.Compilar.UseVisualStyleBackColor = true;

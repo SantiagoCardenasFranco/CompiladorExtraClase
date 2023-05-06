@@ -676,7 +676,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState4()
         {
             //Retorna entero, devuelve puntero
-            CreateComponentReturningIndex(Category.ENTERO, ComponentType.NORMAL);
+            CreateComponentReturningIndex(Category.ENTERO, ComponentType.LITERAL);
         }
 
         private static void ProcessState5()
@@ -710,7 +710,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState7()
         {
             //Retorno decimal, devuelve puntero
-            CreateComponentReturningIndex(Category.DECIMAL, ComponentType.NORMAL);
+            CreateComponentReturningIndex(Category.DECIMAL, ComponentType.LITERAL);
         }
 
         private static void ProcessState8()
@@ -731,31 +731,31 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState9()
         {
             //Retorno resta
-            CreateComponentWithoutReturningIndex(Category.RESTA, ComponentType.NORMAL);
+            CreateComponentWithoutReturningIndex(Category.RESTA, ComponentType.LITERAL);
         }
 
         private static void ProcessState10()
         {
             //Retorno multiplicación
-            CreateComponentWithoutReturningIndex(Category.MULTIPLICACION, ComponentType.NORMAL);
+            CreateComponentWithoutReturningIndex(Category.MULTIPLICACION, ComponentType.LITERAL);
         }
 
         private static void ProcessState11()
         {
             //Retorno división 
-            CreateComponentWithoutReturningIndex(Category.DIVISION, ComponentType.NORMAL);
+            CreateComponentWithoutReturningIndex(Category.DIVISION, ComponentType.LITERAL);
         }
 
         private static void ProcessState12()
         {
             //Retorno parentesis abre
-            CreateComponentWithoutReturningIndex(Category.PARENTESIS_ABRE, ComponentType.NORMAL);
+            CreateComponentWithoutReturningIndex(Category.PARENTESIS_ABRE, ComponentType.LITERAL);
         }
 
         private static void ProcessState13()
         {
             //Retorno parentesis cierra
-            CreateComponentWithoutReturningIndex(Category.PARENTESIS_CIERRA, ComponentType.NORMAL);
+            CreateComponentWithoutReturningIndex(Category.PARENTESIS_CIERRA, ComponentType.LITERAL);
         }
 
         private static void ProcessState14()
@@ -840,6 +840,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState20()
         {
             //Retorno fin del archivo
+            //Si es un literal
             CreateComponentWithoutReturningIndex(Category.FIN_DE_ARCHIVO, ComponentType.NORMAL);
         }
 
@@ -864,7 +865,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState22()
         {
             //Retorno menor que, devuelve puntero
-            CreateComponentReturningIndex(Category.MENOR_QUE, ComponentType.NORMAL);
+            CreateComponentReturningIndex(Category.MENOR_QUE, ComponentType.LITERAL);
         }
         private static void ProcessState23()
         {
@@ -883,7 +884,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState24()
         {
             //Retorno mayor que, devuelve puntero
-            CreateComponentReturningIndex(Category.MAYOR_QUE, ComponentType.NORMAL);
+            CreateComponentReturningIndex(Category.MAYOR_QUE, ComponentType.LITERAL);
         }
 
         private static void ProcessState25()
@@ -909,13 +910,13 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState27()
         {
             //Retorna asignación, devuelve puntero
-            CreateComponentReturningIndex(Category.ASIGNACION, ComponentType.NORMAL);
+            CreateComponentReturningIndex(Category.ASIGNACION, ComponentType.LITERAL);
         }
 
         private static void ProcessState28()
         {
             //Retorno menor o igual
-            CreateComponentWithoutReturningIndex(Category.MENOR_IGUAL_QUE, ComponentType.NORMAL);
+            CreateComponentWithoutReturningIndex(Category.MENOR_IGUAL_QUE, ComponentType.LITERAL);
         }
 
         private static void ProcessState29()
@@ -1016,7 +1017,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
             Scanner.ReadNextCharacter();
             if (IsEndLine())
             {
-                CreateComponentWithoutReturningIndex(Category.COMENTARIO_UNA_LINEA, ComponentType.NORMAL);
+                CreateComponentWithoutReturningIndex(Category.COMENTARIO_UNA_LINEA, ComponentType.LITERAL);
                 INSTANCE.CurrentState = 19;
             }
             else
@@ -1029,7 +1030,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState35()
         {
             //Retorna cadena de texto
-            CreateComponentWithoutReturningIndex(Category.CADENA_DE_TEXTO, ComponentType.NORMAL);
+            CreateComponentWithoutReturningIndex(Category.CADENA_DE_TEXTO, ComponentType.LITERAL);
         }
 
         private static void ProcessState36()
@@ -1046,7 +1047,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState37()
         {
             //Retorna suma
-            CreateComponentWithoutReturningIndex(Category.SUMA, ComponentType.NORMAL);
+            CreateComponentWithoutReturningIndex(Category.SUMA, ComponentType.LITERAL);
         }
 
         private static void ProcessState38()
@@ -1181,19 +1182,19 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState50()
         {
             //Retorna inicio archivo
-            CreateComponentWithoutReturningIndex(Category.INICIO_ARCHIVO, ComponentType.NORMAL);
+            CreateComponentWithoutReturningIndex(Category.INICIO_ARCHIVO, ComponentType.LITERAL);
         }
 
         private static void ProcessState51()
         {
             //Retorna mayor o igual
-            CreateComponentWithoutReturningIndex(Category.MAYOR_IGUAL_QUE, ComponentType.NORMAL);
+            CreateComponentWithoutReturningIndex(Category.MAYOR_IGUAL_QUE, ComponentType.LITERAL);
         }
 
         private static void ProcessState52()
         {
             //Retorna diferente que
-            CreateComponentWithoutReturningIndex(Category.DIFERENTE_QUE, ComponentType.NORMAL);
+            CreateComponentWithoutReturningIndex(Category.DIFERENTE_QUE, ComponentType.LITERAL);
 
         }
 
@@ -1244,13 +1245,13 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState57()
         {
             //Retorna nombre del programa
-            CreateComponentWithoutReturningIndex(Category.NOMBREPROGRAMA, ComponentType.NORMAL);
+            CreateComponentWithoutReturningIndex(Category.NOMBREPROGRAMA, ComponentType.LITERAL);
         }
 
         private static void ProcessState58()
         {
             //Retorna igual que
-            CreateComponentWithoutReturningIndex(Category.IGUAL_QUE, ComponentType.NORMAL);
+            CreateComponentWithoutReturningIndex(Category.IGUAL_QUE, ComponentType.LITERAL);
         }
 
         private static void ProcessState59()
@@ -1498,7 +1499,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
         private static void ProcessState81()
         {
             //Retorna concatenación
-            CreateComponentWithoutReturningIndex(Category.CONCATENACION, ComponentType.NORMAL);
+            CreateComponentWithoutReturningIndex(Category.CONCATENACION, ComponentType.LITERAL);
         }
 
         //Revisar--------------------------------------------------------------------------------------------
@@ -1899,6 +1900,13 @@ namespace UCOCompilador12023.LexicalAnalyzer
                 int finalPosition = Scanner.GetCurrentIndex() - 1;
                 int initialPosition = Scanner.GetCurrentIndex() - INSTANCE.Lexeme.Length + 1;
                 INSTANCE.Component = LexicalComponent.CreateDummyComponent(lineNumber, initialPosition, finalPosition, category, INSTANCE.Lexeme);
+            }
+            else if (ComponentType.LITERAL.Equals(type))
+            {
+                int finalPosition = Scanner.GetCurrentIndex() - 1;
+                int initialPosition = Scanner.GetCurrentIndex() - INSTANCE.Lexeme.Length;
+                INSTANCE.Component = LexicalComponent.CreateLiteralComponent(lineNumber, initialPosition, finalPosition, category, INSTANCE.Lexeme);
+
             }
             else if (ComponentType.PALABRA_RESERVADA.Equals(type))
             {

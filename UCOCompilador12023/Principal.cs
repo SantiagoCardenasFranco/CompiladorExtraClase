@@ -68,6 +68,12 @@ namespace UCOCompilador12023
         {
             url.Clear();
             info.Clear();
+            Cache.Clear();
+            clearDataGrid(SimbolosdataGridView);
+            clearDataGrid(LiteralesdataGridView);
+            clearDataGrid(ReservadasdataGridView);
+            clearDataGrid(dummiesDataGridView);
+            clearDataGrid(ErrorDataGridVIew);
         }
 
         private void info_TextChanged(object sender, EventArgs e)
@@ -98,7 +104,7 @@ namespace UCOCompilador12023
                 Console.WriteLine("¡¡¡ERROR DE COMPILACIÓN!!!");
                 Console.WriteLine(ex.Message);
             }
-            if (TablaMaestra.GetComponentsAsList(ComponentType.NORMAL).Count > 0)
+            /*if (TablaMaestra.GetComponentsAsList(ComponentType.NORMAL).Count > 0)
             {
                 Console.WriteLine("Simbolos: ");
                 foreach (LexicalComponent componentTmp in TablaMaestra.GetComponentsAsList(ComponentType.NORMAL))
@@ -137,7 +143,7 @@ namespace UCOCompilador12023
                     Console.WriteLine(componentTmp.ToString());
 
                 }
-            }
+            }*/
 
             if (ErrorManagement.HayErrores())
             {
@@ -151,12 +157,6 @@ namespace UCOCompilador12023
                     Console.WriteLine("_________________________________________________________________");
                     adicionarCeldaATablaErrores(error.GetType(), error.GetCause(), error.GetSolution(), error.GetExpectedCategory(), error.GetLineNumber(), 
                         error.GetInitialPosition(), error.GetFinalPosition(), error.GetLexeme());
-
-               
-        
-
-
-
                     }
             }
         }
