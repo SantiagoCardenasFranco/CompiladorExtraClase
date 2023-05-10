@@ -147,14 +147,15 @@ namespace UCOCompilador12023
 
             if (ErrorManagement.HayErrores())
             {
-                Console.WriteLine("_________________________________________________________________");
-                Console.WriteLine("LISTADO DE ERRORES LÉXICOS");
-                Console.WriteLine("_________________________________________________________________");
+                //Console.WriteLine("_________________________________________________________________");
+                //Console.WriteLine("LISTADO DE ERRORES LÉXICOS");
+                //Console.WriteLine("_________________________________________________________________");
 
+                clearDataGrid(ErrorDataGridVIew);
                 foreach (Error error in ErrorManagement.GetErrors(ErrorLevel.LEXICO))
                 {
                     Console.WriteLine(error.ToString());
-                    Console.WriteLine("_________________________________________________________________");
+                    //Console.WriteLine("_________________________________________________________________");
                     adicionarCeldaATablaErrores(error.GetType(), error.GetCause(), error.GetSolution(), error.GetExpectedCategory(), error.GetLineNumber(), 
                         error.GetInitialPosition(), error.GetFinalPosition(), error.GetLexeme());
                     }
@@ -301,7 +302,6 @@ namespace UCOCompilador12023
 
         private void adicionarCeldaATablaErrores( ErrorType errorType,String cause,String solution,Category ExpectedCategory, int numeroLinea, int posicionInicial, int posicionFinal, string lexema)
         {
-            clearDataGrid(ErrorDataGridVIew);
             int numero = ErrorDataGridVIew.Rows.Add();
 
             ErrorDataGridVIew.Rows[numero].Cells[0].Value = errorType;
@@ -314,6 +314,19 @@ namespace UCOCompilador12023
             ErrorDataGridVIew.Rows[numero].Cells[7].Value = posicionFinal.ToString();
         }
 
-       
+        private void TablaPalabrasResevadasgroupBox_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ErrorLexico_Click(object sender, EventArgs e)
+        {
+            //clearDataGrid(ErrorDataGridVIew);
+            //foreach (Error error in ErrorManagement.GetErrors(ErrorLevel.LEXICO))
+            //{
+            //    adicionarCeldaATablaErrores(error.GetType(), error.GetCause(), error.GetSolution(), error.GetExpectedCategory(), error.GetLineNumber(),
+            //        error.GetInitialPosition(), error.GetFinalPosition(), error.GetLexeme());
+            //}
+        }
     }
 }

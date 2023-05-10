@@ -37,7 +37,7 @@ namespace UCOCompilador12023.CrossCutting
 
         public static LexicalComponent ComprobarComponent(LexicalComponent component)
         {
-            if (component != null && PALABRAS_RESERVADAS.ContainsKey(component.GetLexeme()))
+            if (component != null && ComponentType.NORMAL.Equals(component.componentType) && PALABRAS_RESERVADAS.ContainsKey(component.GetLexeme()))
             {
                 return LexicalComponent.CreatePalabraReservadaComponent(component.GetLineNumber(),
                     component.GetInitialPosition(), component.GetFinalPosition(),

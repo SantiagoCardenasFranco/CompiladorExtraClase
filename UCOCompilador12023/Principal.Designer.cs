@@ -81,6 +81,7 @@
             this.LineNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.InitialPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FinalPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ErrorLexico = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.principalMenu.SuspendLayout();
             this.tablasMenu.SuspendLayout();
@@ -209,6 +210,7 @@
             this.TablaPalabrasResevadasgroupBox.TabIndex = 19;
             this.TablaPalabrasResevadasgroupBox.TabStop = false;
             this.TablaPalabrasResevadasgroupBox.Text = "Tabla de Palabras Resevadas";
+            this.TablaPalabrasResevadasgroupBox.Enter += new System.EventHandler(this.TablaPalabrasResevadasgroupBox_Enter);
             // 
             // ReservadasdataGridView
             // 
@@ -522,6 +524,7 @@
             // 
             // ErroresMenu
             // 
+            this.ErroresMenu.Controls.Add(this.ErrorLexico);
             this.ErroresMenu.Controls.Add(this.ErrorDataGridVIew);
             this.ErroresMenu.Location = new System.Drawing.Point(4, 22);
             this.ErroresMenu.Name = "ErroresMenu";
@@ -545,7 +548,7 @@
             this.FinalPosition});
             this.ErrorDataGridVIew.Location = new System.Drawing.Point(3, 3);
             this.ErrorDataGridVIew.Name = "ErrorDataGridVIew";
-            this.ErrorDataGridVIew.Size = new System.Drawing.Size(846, 354);
+            this.ErrorDataGridVIew.Size = new System.Drawing.Size(846, 328);
             this.ErrorDataGridVIew.TabIndex = 0;
             // 
             // type
@@ -587,6 +590,24 @@
             // 
             this.FinalPosition.HeaderText = "Posición Final";
             this.FinalPosition.Name = "FinalPosition";
+            // 
+            // ErrorLexico
+            // 
+            this.ErrorLexico.BackColor = System.Drawing.Color.White;
+            this.ErrorLexico.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ErrorLexico.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.ErrorLexico.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightCoral;
+            this.ErrorLexico.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightCoral;
+            this.ErrorLexico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ErrorLexico.ForeColor = System.Drawing.Color.Black;
+            this.ErrorLexico.Location = new System.Drawing.Point(25, 355);
+            this.ErrorLexico.Margin = new System.Windows.Forms.Padding(0);
+            this.ErrorLexico.Name = "ErrorLexico";
+            this.ErrorLexico.Size = new System.Drawing.Size(75, 38);
+            this.ErrorLexico.TabIndex = 13;
+            this.ErrorLexico.Text = "Error";
+            this.ErrorLexico.UseVisualStyleBackColor = false;
+            this.ErrorLexico.Click += new System.EventHandler(this.ErrorLexico_Click);
             // 
             // Principal
             // 
@@ -671,5 +692,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn LineNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn InitialPosition;
         private System.Windows.Forms.DataGridViewTextBoxColumn FinalPosition;
+        private System.Windows.Forms.Button ErrorLexico;
     }
 }

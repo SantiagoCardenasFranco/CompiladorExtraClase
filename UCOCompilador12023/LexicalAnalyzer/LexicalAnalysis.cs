@@ -1573,15 +1573,14 @@ namespace UCOCompilador12023.LexicalAnalyzer
 
         private static void ProcessState86()
         {
-            //Error no condición competa
             string fail = "Valor \"y\" lógico no válido...";
             string cause = "Se ha recibido un caracter que no corresponde a un \"y\"";
             string solution = "Asegúrese de que luego de @y, contiene un @";
-            CreateLexicalErrorPalabraReservada(ErrorType.CONTROLABLE, fail, cause, solution, Category.Y,
-                INSTANCE.Lexeme + Scanner.GetCurrentCharacter(), INSTANCE.Lexeme.Length +1);
-
+            CreateLexicalError(ErrorType.CONTROLABLE, fail, cause, solution, Category.Y,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
+            //Error no condición competa
             Concanate("@");
-            CreateComponentReturningIndex(Category.Y, ComponentType.PALABRA_RESERVADA);
+            CreateComponentWithoutReturningIndex(Category.Y, ComponentType.DUMMY);
         }
 
         private static void ProcessState87()
@@ -1590,12 +1589,12 @@ namespace UCOCompilador12023.LexicalAnalyzer
             string fail = "Valor \"o\" lógico no válido...";
             string cause = "Se ha recibido un caracter que no corresponde a un \"o\"";
             string solution = "Asegúrese de que luego de @o, contiene un @";
-            CreateLexicalErrorPalabraReservada(ErrorType.CONTROLABLE, fail, cause, solution, Category.O,
-                INSTANCE.Lexeme + Scanner.GetCurrentCharacter(), INSTANCE.Lexeme.Length + 1);
+            CreateLexicalError(ErrorType.CONTROLABLE, fail, cause, solution, Category.O,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
 
             //Error no condición competa
             Concanate("@");
-            CreateComponentReturningIndex(Category.O, ComponentType.PALABRA_RESERVADA);
+            CreateComponentWithoutReturningIndex(Category.O, ComponentType.DUMMY);
         }
 
         private static void ProcessState88()
@@ -1630,11 +1629,11 @@ namespace UCOCompilador12023.LexicalAnalyzer
             string fail = "Valor \"sino\" lógico no válido...";
             string cause = "Se ha recibido un caracter que no corresponde a un \"sino\"";
             string solution = "Asegúrese de que luego de @sino, contiene un @";
-            CreateLexicalErrorPalabraReservada(ErrorType.CONTROLABLE, fail, cause, solution, Category.SINO,
-                INSTANCE.Lexeme + Scanner.GetCurrentCharacter(), INSTANCE.Lexeme.Length + 1);
+            CreateLexicalError(ErrorType.CONTROLABLE, fail, cause, solution, Category.SINO, 
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
             //Error no condición competa
             Concanate("@");
-            CreateComponentWithoutReturningIndex(Category.SINO, ComponentType.PALABRA_RESERVADA);
+            CreateComponentWithoutReturningIndex(Category.SINO, ComponentType.DUMMY);
         }
 
         private static void ProcessState92()
@@ -1677,14 +1676,14 @@ namespace UCOCompilador12023.LexicalAnalyzer
         {
             //Error no condición competa
             string fail = "Valor \"finsi\" lógico no válido...";
-            string cause = "Se ha recibido un caracter que no corresponde a un \finsi\"";
+            string cause = "Se ha recibido un caracter que no corresponde a un \"finsi\"";
             string solution = "Asegúrese de que luego de @finsi, contiene un @";
-            CreateLexicalErrorPalabraReservada(ErrorType.CONTROLABLE, fail, cause, solution, Category.FINSI,
-                INSTANCE.Lexeme + Scanner.GetCurrentCharacter(), INSTANCE.Lexeme.Length + 1);
+            CreateLexicalError(ErrorType.CONTROLABLE, fail, cause, solution, Category.FINSI, 
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
 
             //Error no condición competa
             Concanate("@");
-            CreateComponentReturningIndex(Category.FINSI, ComponentType.PALABRA_RESERVADA);
+            CreateComponentWithoutReturningIndex(Category.FINSI, ComponentType.DUMMY);
         }
 
         //Revisar ---------------------------------------------------------------------------------------
@@ -1755,11 +1754,11 @@ namespace UCOCompilador12023.LexicalAnalyzer
             string fail = "Valor \"entonces\" lógico no válido...";
             string cause = "Se ha recibido un caracter que no corresponde a un \"entonces\"";
             string solution = "Asegúrese de que luego de @entonces, contiene un @";
-            CreateLexicalErrorPalabraReservada(ErrorType.CONTROLABLE, fail, cause, solution, Category.ENTONCES,
-                INSTANCE.Lexeme + Scanner.GetCurrentCharacter(), INSTANCE.Lexeme.Length + 1);
+            CreateLexicalError(ErrorType.CONTROLABLE, fail, cause, solution, Category.ENTONCES, 
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
 
             Concanate("@");
-            CreateComponentWithoutReturningIndex(Category.ENTONCES, ComponentType.PALABRA_RESERVADA);
+            CreateComponentWithoutReturningIndex(Category.ENTONCES, ComponentType.DUMMY);
         }
 
         private static void ProcessState106()
@@ -1812,12 +1811,12 @@ namespace UCOCompilador12023.LexicalAnalyzer
             string fail = "Valor \"imprima\" lógico no válido...";
             string cause = "Se ha recibido un caracter que no corresponde a un \"imprima\"";
             string solution = "Asegúrese de que luego de @escriba, contiene un @";
-            CreateLexicalErrorPalabraReservada(ErrorType.CONTROLABLE, fail, cause, solution, Category.IMPRIMA,
-                INSTANCE.Lexeme + Scanner.GetCurrentCharacter(), INSTANCE.Lexeme.Length + 1);
+            CreateLexicalError(ErrorType.CONTROLABLE, fail, cause, solution, Category.IMPRIMA, 
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
 
             //Error no condición competa
             Concanate("@");
-            CreateComponentWithoutReturningIndex(Category.IMPRIMA, ComponentType.PALABRA_RESERVADA);
+            CreateComponentWithoutReturningIndex(Category.IMPRIMA, ComponentType.DUMMY);
         }
 
         private static void ProcessState112()
@@ -1843,11 +1842,11 @@ namespace UCOCompilador12023.LexicalAnalyzer
             string fail = "Valor \"lea\" lógico no válido...";
             string cause = "Se ha recibido un caracter que no corresponde a un \"lea\"";
             string solution = "Asegúrese de que luego de @lea, contiene un @";
-            CreateLexicalErrorPalabraReservada(ErrorType.CONTROLABLE, fail, cause, solution, Category.INPUT,
-                INSTANCE.Lexeme + Scanner.GetCurrentCharacter(), INSTANCE.Lexeme.Length + 1);
+            CreateLexicalError(ErrorType.CONTROLABLE, fail, cause, solution, Category.INPUT,
+                INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
             //Error no condición competa
             Concanate("@");
-            CreateComponentWithoutReturningIndex(Category.INPUT, ComponentType.PALABRA_RESERVADA);
+            CreateComponentWithoutReturningIndex(Category.INPUT, ComponentType.DUMMY);
         }
 
         private static void ProcessState115()
@@ -1898,7 +1897,8 @@ namespace UCOCompilador12023.LexicalAnalyzer
             else if(ComponentType.DUMMY.Equals(type))
             {
                 int finalPosition = Scanner.GetCurrentIndex() - 1;
-                int initialPosition = Scanner.GetCurrentIndex() - INSTANCE.Lexeme.Length + 1;
+                int initialPosition = Scanner.GetCurrentIndex() - INSTANCE.Lexeme.Length;
+                Console.WriteLine(Scanner.GetCurrentIndex());
                 INSTANCE.Component = LexicalComponent.CreateDummyComponent(lineNumber, initialPosition, finalPosition, category, INSTANCE.Lexeme);
             }
             else if (ComponentType.LITERAL.Equals(type))
