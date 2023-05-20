@@ -13,6 +13,7 @@ using UCOCompilador12023.CrossCutting;
 using UCOCompilador12023.DataCache;
 using UCOCompilador12023.ErrorManager;
 using UCOCompilador12023.LexicalAnalyzer;
+using UCOCompilador12023.SintacticAnalyzer;
 
 namespace UCOCompilador12023
 {
@@ -98,6 +99,9 @@ namespace UCOCompilador12023
                 {
                     component = LexicalAnalysis.Analyze();
                 }
+                SintacticAnalysis SinAna = new SintacticAnalysis();
+                string response = SinAna.Analyze();
+                Console.WriteLine(response);
             }
             catch (Exception ex)
             {
@@ -145,7 +149,7 @@ namespace UCOCompilador12023
                 }
             }*/
 
-            if (ErrorManagement.HayErrores())
+            /*if (ErrorManagement.HayErrores())
             {
                 //Console.WriteLine("_________________________________________________________________");
                 //Console.WriteLine("LISTADO DE ERRORES LÉXICOS");
@@ -159,7 +163,7 @@ namespace UCOCompilador12023
                     adicionarCeldaATablaErrores(error.GetType(), error.GetCause(), error.GetSolution(), error.GetExpectedCategory(), error.GetLineNumber(), 
                         error.GetInitialPosition(), error.GetFinalPosition(), error.GetLexeme());
                     }
-            }
+            }*/
         }
 
         private void clearDataGrid(DataGridView dataGrid)
@@ -321,12 +325,40 @@ namespace UCOCompilador12023
 
         private void ErrorLexico_Click(object sender, EventArgs e)
         {
-            //clearDataGrid(ErrorDataGridVIew);
-            //foreach (Error error in ErrorManagement.GetErrors(ErrorLevel.LEXICO))
-            //{
-            //    adicionarCeldaATablaErrores(error.GetType(), error.GetCause(), error.GetSolution(), error.GetExpectedCategory(), error.GetLineNumber(),
-            //        error.GetInitialPosition(), error.GetFinalPosition(), error.GetLexeme());
-            //}
+            ErroresSintacticosgroupBox.Hide();
+            ErroresLexicosgroupBox.Show();
+            clearDataGrid(ErrorDataGridVIew);
+            foreach (Error error in ErrorManagement.GetErrors(ErrorLevel.LEXICO))
+            {
+                adicionarCeldaATablaErrores(error.GetType(), error.GetCause(), error.GetSolution(), error.GetExpectedCategory(), error.GetLineNumber(),
+                    error.GetInitialPosition(), error.GetFinalPosition(), error.GetLexeme());
+            }
+        }
+
+        private void ErrorSintactico_Click(object sender, EventArgs e)
+        {
+            ErroresLexicosgroupBox.Hide();
+            ErroresSintacticosgroupBox.Show();
+            clearDataGrid(ErrorDataGridVIew);
+            foreach (Error error in ErrorManagement.GetErrors(ErrorLevel.SINTACTICO))
+            {
+                adicionarCeldaATablaErroresSintacticos(error.GetType(), error.GetCause(), error.GetSolution(), error.GetExpectedCategory(), error.GetLineNumber(),
+                    error.GetInitialPosition(), error.GetFinalPosition(), error.GetLexeme());
+            }
+        }
+
+        private void adicionarCeldaATablaErroresSintacticos(ErrorType errorType, String cause, String solution, Category ExpectedCategory, int numeroLinea, int posicionInicial, int posicionFinal, string lexema)
+        {
+            int numero = ErroresSintacticosdataGridView.Rows.Add();
+
+            ErroresSintacticosdataGridView.Rows[numero].Cells[0].Value = errorType;
+            ErroresSintacticosdataGridView.Rows[numero].Cells[1].Value = cause;
+            ErroresSintacticosdataGridView.Rows[numero].Cells[2].Value = solution;
+            ErroresSintacticosdataGridView.Rows[numero].Cells[3].Value = ExpectedCategory;
+            ErroresSintacticosdataGridView.Rows[numero].Cells[4].Value = lexema;
+            ErroresSintacticosdataGridView.Rows[numero].Cells[5].Value = numeroLinea.ToString();
+            ErroresSintacticosdataGridView.Rows[numero].Cells[6].Value = posicionInicial.ToString();
+            ErroresSintacticosdataGridView.Rows[numero].Cells[7].Value = posicionFinal.ToString();
         }
     }
 }

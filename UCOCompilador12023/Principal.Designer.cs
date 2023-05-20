@@ -72,6 +72,7 @@
             this.tablaLiteralesButton = new System.Windows.Forms.Button();
             this.tablaSimbolosButton = new System.Windows.Forms.Button();
             this.ErroresMenu = new System.Windows.Forms.TabPage();
+            this.ErrorLexico = new System.Windows.Forms.Button();
             this.ErrorDataGridVIew = new System.Windows.Forms.DataGridView();
             this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cause = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -81,7 +82,19 @@
             this.LineNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.InitialPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FinalPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ErrorLexico = new System.Windows.Forms.Button();
+            this.ErroresLexicosgroupBox = new System.Windows.Forms.GroupBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.ErrorSintactico = new System.Windows.Forms.Button();
+            this.ErroresSintacticosdataGridView = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn27 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn28 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ErroresSintacticosgroupBox = new System.Windows.Forms.GroupBox();
             this.tabControl1.SuspendLayout();
             this.principalMenu.SuspendLayout();
             this.tablasMenu.SuspendLayout();
@@ -95,6 +108,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dummiesDataGridView)).BeginInit();
             this.ErroresMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ErrorDataGridVIew)).BeginInit();
+            this.ErroresLexicosgroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ErroresSintacticosdataGridView)).BeginInit();
+            this.ErroresSintacticosgroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // Buscar
@@ -524,14 +540,34 @@
             // 
             // ErroresMenu
             // 
+            this.ErroresMenu.Controls.Add(this.ErroresSintacticosgroupBox);
+            this.ErroresMenu.Controls.Add(this.ErrorSintactico);
+            this.ErroresMenu.Controls.Add(this.ErroresLexicosgroupBox);
             this.ErroresMenu.Controls.Add(this.ErrorLexico);
-            this.ErroresMenu.Controls.Add(this.ErrorDataGridVIew);
             this.ErroresMenu.Location = new System.Drawing.Point(4, 22);
             this.ErroresMenu.Name = "ErroresMenu";
             this.ErroresMenu.Size = new System.Drawing.Size(885, 422);
             this.ErroresMenu.TabIndex = 2;
             this.ErroresMenu.Text = "Errores";
             this.ErroresMenu.UseVisualStyleBackColor = true;
+            // 
+            // ErrorLexico
+            // 
+            this.ErrorLexico.BackColor = System.Drawing.Color.White;
+            this.ErrorLexico.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ErrorLexico.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.ErrorLexico.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightCoral;
+            this.ErrorLexico.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightCoral;
+            this.ErrorLexico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ErrorLexico.ForeColor = System.Drawing.Color.Black;
+            this.ErrorLexico.Location = new System.Drawing.Point(25, 381);
+            this.ErrorLexico.Margin = new System.Windows.Forms.Padding(0);
+            this.ErrorLexico.Name = "ErrorLexico";
+            this.ErrorLexico.Size = new System.Drawing.Size(75, 38);
+            this.ErrorLexico.TabIndex = 13;
+            this.ErrorLexico.Text = "Errores Léxicos";
+            this.ErrorLexico.UseVisualStyleBackColor = false;
+            this.ErrorLexico.Click += new System.EventHandler(this.ErrorLexico_Click);
             // 
             // ErrorDataGridVIew
             // 
@@ -546,7 +582,7 @@
             this.LineNumber,
             this.InitialPosition,
             this.FinalPosition});
-            this.ErrorDataGridVIew.Location = new System.Drawing.Point(3, 3);
+            this.ErrorDataGridVIew.Location = new System.Drawing.Point(6, 19);
             this.ErrorDataGridVIew.Name = "ErrorDataGridVIew";
             this.ErrorDataGridVIew.Size = new System.Drawing.Size(846, 328);
             this.ErrorDataGridVIew.TabIndex = 0;
@@ -591,23 +627,101 @@
             this.FinalPosition.HeaderText = "Posición Final";
             this.FinalPosition.Name = "FinalPosition";
             // 
-            // ErrorLexico
+            // ErroresLexicosgroupBox
             // 
-            this.ErrorLexico.BackColor = System.Drawing.Color.White;
-            this.ErrorLexico.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ErrorLexico.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.ErrorLexico.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightCoral;
-            this.ErrorLexico.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightCoral;
-            this.ErrorLexico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ErrorLexico.ForeColor = System.Drawing.Color.Black;
-            this.ErrorLexico.Location = new System.Drawing.Point(25, 355);
-            this.ErrorLexico.Margin = new System.Windows.Forms.Padding(0);
-            this.ErrorLexico.Name = "ErrorLexico";
-            this.ErrorLexico.Size = new System.Drawing.Size(75, 38);
-            this.ErrorLexico.TabIndex = 13;
-            this.ErrorLexico.Text = "Error";
-            this.ErrorLexico.UseVisualStyleBackColor = false;
-            this.ErrorLexico.Click += new System.EventHandler(this.ErrorLexico_Click);
+            this.ErroresLexicosgroupBox.Controls.Add(this.ErrorDataGridVIew);
+            this.ErroresLexicosgroupBox.Location = new System.Drawing.Point(8, 5);
+            this.ErroresLexicosgroupBox.Name = "ErroresLexicosgroupBox";
+            this.ErroresLexicosgroupBox.Size = new System.Drawing.Size(866, 360);
+            this.ErroresLexicosgroupBox.TabIndex = 14;
+            this.ErroresLexicosgroupBox.TabStop = false;
+            this.ErroresLexicosgroupBox.Text = "Errores Léxicos";
+            // 
+            // ErrorSintactico
+            // 
+            this.ErrorSintactico.BackColor = System.Drawing.Color.White;
+            this.ErrorSintactico.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ErrorSintactico.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.ErrorSintactico.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightCoral;
+            this.ErrorSintactico.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightCoral;
+            this.ErrorSintactico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ErrorSintactico.ForeColor = System.Drawing.Color.Black;
+            this.ErrorSintactico.Location = new System.Drawing.Point(132, 381);
+            this.ErrorSintactico.Margin = new System.Windows.Forms.Padding(0);
+            this.ErrorSintactico.Name = "ErrorSintactico";
+            this.ErrorSintactico.Size = new System.Drawing.Size(75, 38);
+            this.ErrorSintactico.TabIndex = 15;
+            this.ErrorSintactico.Text = "Errores Sintacticos";
+            this.ErrorSintactico.UseVisualStyleBackColor = false;
+            this.ErrorSintactico.Click += new System.EventHandler(this.ErrorSintactico_Click);
+            // 
+            // ErroresSintacticosdataGridView
+            // 
+            this.ErroresSintacticosdataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.ErroresSintacticosdataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ErroresSintacticosdataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn21,
+            this.dataGridViewTextBoxColumn22,
+            this.dataGridViewTextBoxColumn23,
+            this.dataGridViewTextBoxColumn24,
+            this.dataGridViewTextBoxColumn25,
+            this.dataGridViewTextBoxColumn26,
+            this.dataGridViewTextBoxColumn27,
+            this.dataGridViewTextBoxColumn28});
+            this.ErroresSintacticosdataGridView.Location = new System.Drawing.Point(6, 18);
+            this.ErroresSintacticosdataGridView.Name = "ErroresSintacticosdataGridView";
+            this.ErroresSintacticosdataGridView.Size = new System.Drawing.Size(846, 328);
+            this.ErroresSintacticosdataGridView.TabIndex = 1;
+            // 
+            // dataGridViewTextBoxColumn21
+            // 
+            this.dataGridViewTextBoxColumn21.HeaderText = "Tipo";
+            this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
+            // 
+            // dataGridViewTextBoxColumn22
+            // 
+            this.dataGridViewTextBoxColumn22.HeaderText = "Causa";
+            this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
+            // 
+            // dataGridViewTextBoxColumn23
+            // 
+            this.dataGridViewTextBoxColumn23.HeaderText = "Solución ";
+            this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
+            // 
+            // dataGridViewTextBoxColumn24
+            // 
+            this.dataGridViewTextBoxColumn24.HeaderText = "Categoría Esperada ";
+            this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
+            // 
+            // dataGridViewTextBoxColumn25
+            // 
+            this.dataGridViewTextBoxColumn25.HeaderText = "Lexema";
+            this.dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
+            // 
+            // dataGridViewTextBoxColumn26
+            // 
+            this.dataGridViewTextBoxColumn26.HeaderText = "Línea";
+            this.dataGridViewTextBoxColumn26.Name = "dataGridViewTextBoxColumn26";
+            // 
+            // dataGridViewTextBoxColumn27
+            // 
+            this.dataGridViewTextBoxColumn27.HeaderText = "Posición inicial";
+            this.dataGridViewTextBoxColumn27.Name = "dataGridViewTextBoxColumn27";
+            // 
+            // dataGridViewTextBoxColumn28
+            // 
+            this.dataGridViewTextBoxColumn28.HeaderText = "Posición Final";
+            this.dataGridViewTextBoxColumn28.Name = "dataGridViewTextBoxColumn28";
+            // 
+            // ErroresSintacticosgroupBox
+            // 
+            this.ErroresSintacticosgroupBox.Controls.Add(this.ErroresSintacticosdataGridView);
+            this.ErroresSintacticosgroupBox.Location = new System.Drawing.Point(7, 6);
+            this.ErroresSintacticosgroupBox.Name = "ErroresSintacticosgroupBox";
+            this.ErroresSintacticosgroupBox.Size = new System.Drawing.Size(862, 359);
+            this.ErroresSintacticosgroupBox.TabIndex = 1;
+            this.ErroresSintacticosgroupBox.TabStop = false;
+            this.ErroresSintacticosgroupBox.Text = "Errores Sintacticos";
             // 
             // Principal
             // 
@@ -633,6 +747,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dummiesDataGridView)).EndInit();
             this.ErroresMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ErrorDataGridVIew)).EndInit();
+            this.ErroresLexicosgroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ErroresSintacticosdataGridView)).EndInit();
+            this.ErroresSintacticosgroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -693,5 +810,18 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn InitialPosition;
         private System.Windows.Forms.DataGridViewTextBoxColumn FinalPosition;
         private System.Windows.Forms.Button ErrorLexico;
+        private System.Windows.Forms.Button ErrorSintactico;
+        private System.Windows.Forms.GroupBox ErroresLexicosgroupBox;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.GroupBox ErroresSintacticosgroupBox;
+        private System.Windows.Forms.DataGridView ErroresSintacticosdataGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn22;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn23;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn24;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn25;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn26;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn27;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn28;
     }
 }

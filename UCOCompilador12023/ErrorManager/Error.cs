@@ -39,9 +39,20 @@ namespace UCOCompilador12023.ErrorManager
             return new Error(lineNumber, initialPosition, finalPosition, fail, cause, solution, ErrorLevel.LEXICO, ErrorType.STOPPER, expectedCategory, lexeme);
         }
 
+        public static Error CreateStopperSintacticlError(int lineNumber, int initialPosition, int finalPosition, string fail, string cause, string solution, Category expectedCategory, string lexeme)
+        {
+            return new Error(lineNumber, initialPosition, finalPosition, fail, cause, solution, ErrorLevel.SINTACTICO, ErrorType.STOPPER, expectedCategory, lexeme);
+        }
+
+
         public static Error CreateNoStopperLexicalError(int lineNumber, int initialPosition, int finalPosition, string fail, string cause, string solution, Category expectedCategory, string lexeme)
         {
             return new Error(lineNumber, initialPosition, finalPosition, fail, cause, solution, ErrorLevel.LEXICO, ErrorType.CONTROLABLE, expectedCategory, lexeme);
+        }
+
+        public static Error CreateNoStopperSintacticError(int lineNumber, int initialPosition, int finalPosition, string fail, string cause, string solution, Category expectedCategory, string lexeme)
+        {
+            return new Error(lineNumber, initialPosition, finalPosition, fail, cause, solution, ErrorLevel.SINTACTICO, ErrorType.CONTROLABLE, expectedCategory, lexeme);
         }
 
         public void SetLineNumber(int lineNumber)
