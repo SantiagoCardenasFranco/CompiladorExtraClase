@@ -72,19 +72,7 @@
             this.tablaLiteralesButton = new System.Windows.Forms.Button();
             this.tablaSimbolosButton = new System.Windows.Forms.Button();
             this.ErroresMenu = new System.Windows.Forms.TabPage();
-            this.ErrorLexico = new System.Windows.Forms.Button();
-            this.ErrorDataGridVIew = new System.Windows.Forms.DataGridView();
-            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cause = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.solution = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ExpectedCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Lexeme = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LineNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.InitialPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FinalPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ErroresLexicosgroupBox = new System.Windows.Forms.GroupBox();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.ErrorSintactico = new System.Windows.Forms.Button();
+            this.ErroresSintacticosgroupBox = new System.Windows.Forms.GroupBox();
             this.ErroresSintacticosdataGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -94,7 +82,19 @@
             this.dataGridViewTextBoxColumn26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn27 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn28 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ErroresSintacticosgroupBox = new System.Windows.Forms.GroupBox();
+            this.ErrorSintactico = new System.Windows.Forms.Button();
+            this.ErroresLexicosgroupBox = new System.Windows.Forms.GroupBox();
+            this.ErrorDataGridVIew = new System.Windows.Forms.DataGridView();
+            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cause = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.solution = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ExpectedCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Lexeme = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LineNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.InitialPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FinalPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ErrorLexico = new System.Windows.Forms.Button();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.tabControl1.SuspendLayout();
             this.principalMenu.SuspendLayout();
             this.tablasMenu.SuspendLayout();
@@ -107,10 +107,10 @@
             this.tablaDummyGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dummiesDataGridView)).BeginInit();
             this.ErroresMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ErrorDataGridVIew)).BeginInit();
-            this.ErroresLexicosgroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ErroresSintacticosdataGridView)).BeginInit();
             this.ErroresSintacticosgroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ErroresSintacticosdataGridView)).BeginInit();
+            this.ErroresLexicosgroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ErrorDataGridVIew)).BeginInit();
             this.SuspendLayout();
             // 
             // Buscar
@@ -551,109 +551,15 @@
             this.ErroresMenu.Text = "Errores";
             this.ErroresMenu.UseVisualStyleBackColor = true;
             // 
-            // ErrorLexico
+            // ErroresSintacticosgroupBox
             // 
-            this.ErrorLexico.BackColor = System.Drawing.Color.White;
-            this.ErrorLexico.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ErrorLexico.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.ErrorLexico.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightCoral;
-            this.ErrorLexico.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightCoral;
-            this.ErrorLexico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ErrorLexico.ForeColor = System.Drawing.Color.Black;
-            this.ErrorLexico.Location = new System.Drawing.Point(25, 381);
-            this.ErrorLexico.Margin = new System.Windows.Forms.Padding(0);
-            this.ErrorLexico.Name = "ErrorLexico";
-            this.ErrorLexico.Size = new System.Drawing.Size(75, 38);
-            this.ErrorLexico.TabIndex = 13;
-            this.ErrorLexico.Text = "Errores Léxicos";
-            this.ErrorLexico.UseVisualStyleBackColor = false;
-            this.ErrorLexico.Click += new System.EventHandler(this.ErrorLexico_Click);
-            // 
-            // ErrorDataGridVIew
-            // 
-            this.ErrorDataGridVIew.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ErrorDataGridVIew.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ErrorDataGridVIew.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.type,
-            this.cause,
-            this.solution,
-            this.ExpectedCategory,
-            this.Lexeme,
-            this.LineNumber,
-            this.InitialPosition,
-            this.FinalPosition});
-            this.ErrorDataGridVIew.Location = new System.Drawing.Point(6, 19);
-            this.ErrorDataGridVIew.Name = "ErrorDataGridVIew";
-            this.ErrorDataGridVIew.Size = new System.Drawing.Size(846, 328);
-            this.ErrorDataGridVIew.TabIndex = 0;
-            // 
-            // type
-            // 
-            this.type.HeaderText = "Tipo";
-            this.type.Name = "type";
-            // 
-            // cause
-            // 
-            this.cause.HeaderText = "Causa";
-            this.cause.Name = "cause";
-            // 
-            // solution
-            // 
-            this.solution.HeaderText = "Solución ";
-            this.solution.Name = "solution";
-            // 
-            // ExpectedCategory
-            // 
-            this.ExpectedCategory.HeaderText = "Categoría Esperada ";
-            this.ExpectedCategory.Name = "ExpectedCategory";
-            // 
-            // Lexeme
-            // 
-            this.Lexeme.HeaderText = "Lexema";
-            this.Lexeme.Name = "Lexeme";
-            // 
-            // LineNumber
-            // 
-            this.LineNumber.HeaderText = "Línea";
-            this.LineNumber.Name = "LineNumber";
-            // 
-            // InitialPosition
-            // 
-            this.InitialPosition.HeaderText = "Posición inicial";
-            this.InitialPosition.Name = "InitialPosition";
-            // 
-            // FinalPosition
-            // 
-            this.FinalPosition.HeaderText = "Posición Final";
-            this.FinalPosition.Name = "FinalPosition";
-            // 
-            // ErroresLexicosgroupBox
-            // 
-            this.ErroresLexicosgroupBox.Controls.Add(this.ErrorDataGridVIew);
-            this.ErroresLexicosgroupBox.Location = new System.Drawing.Point(8, 5);
-            this.ErroresLexicosgroupBox.Name = "ErroresLexicosgroupBox";
-            this.ErroresLexicosgroupBox.Size = new System.Drawing.Size(866, 360);
-            this.ErroresLexicosgroupBox.TabIndex = 14;
-            this.ErroresLexicosgroupBox.TabStop = false;
-            this.ErroresLexicosgroupBox.Text = "Errores Léxicos";
-            // 
-            // ErrorSintactico
-            // 
-            this.ErrorSintactico.BackColor = System.Drawing.Color.White;
-            this.ErrorSintactico.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ErrorSintactico.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.ErrorSintactico.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightCoral;
-            this.ErrorSintactico.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightCoral;
-            this.ErrorSintactico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ErrorSintactico.ForeColor = System.Drawing.Color.Black;
-            this.ErrorSintactico.Location = new System.Drawing.Point(132, 381);
-            this.ErrorSintactico.Margin = new System.Windows.Forms.Padding(0);
-            this.ErrorSintactico.Name = "ErrorSintactico";
-            this.ErrorSintactico.Size = new System.Drawing.Size(75, 38);
-            this.ErrorSintactico.TabIndex = 15;
-            this.ErrorSintactico.Text = "Errores Sintacticos";
-            this.ErrorSintactico.UseVisualStyleBackColor = false;
-            this.ErrorSintactico.Click += new System.EventHandler(this.ErrorSintactico_Click);
+            this.ErroresSintacticosgroupBox.Controls.Add(this.ErroresSintacticosdataGridView);
+            this.ErroresSintacticosgroupBox.Location = new System.Drawing.Point(7, 6);
+            this.ErroresSintacticosgroupBox.Name = "ErroresSintacticosgroupBox";
+            this.ErroresSintacticosgroupBox.Size = new System.Drawing.Size(862, 359);
+            this.ErroresSintacticosgroupBox.TabIndex = 1;
+            this.ErroresSintacticosgroupBox.TabStop = false;
+            this.ErroresSintacticosgroupBox.Text = "Errores Sintacticos";
             // 
             // ErroresSintacticosdataGridView
             // 
@@ -713,15 +619,109 @@
             this.dataGridViewTextBoxColumn28.HeaderText = "Posición Final";
             this.dataGridViewTextBoxColumn28.Name = "dataGridViewTextBoxColumn28";
             // 
-            // ErroresSintacticosgroupBox
+            // ErrorSintactico
             // 
-            this.ErroresSintacticosgroupBox.Controls.Add(this.ErroresSintacticosdataGridView);
-            this.ErroresSintacticosgroupBox.Location = new System.Drawing.Point(7, 6);
-            this.ErroresSintacticosgroupBox.Name = "ErroresSintacticosgroupBox";
-            this.ErroresSintacticosgroupBox.Size = new System.Drawing.Size(862, 359);
-            this.ErroresSintacticosgroupBox.TabIndex = 1;
-            this.ErroresSintacticosgroupBox.TabStop = false;
-            this.ErroresSintacticosgroupBox.Text = "Errores Sintacticos";
+            this.ErrorSintactico.BackColor = System.Drawing.Color.White;
+            this.ErrorSintactico.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ErrorSintactico.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.ErrorSintactico.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightCoral;
+            this.ErrorSintactico.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightCoral;
+            this.ErrorSintactico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ErrorSintactico.ForeColor = System.Drawing.Color.Black;
+            this.ErrorSintactico.Location = new System.Drawing.Point(132, 381);
+            this.ErrorSintactico.Margin = new System.Windows.Forms.Padding(0);
+            this.ErrorSintactico.Name = "ErrorSintactico";
+            this.ErrorSintactico.Size = new System.Drawing.Size(75, 38);
+            this.ErrorSintactico.TabIndex = 15;
+            this.ErrorSintactico.Text = "Errores Sintacticos";
+            this.ErrorSintactico.UseVisualStyleBackColor = false;
+            this.ErrorSintactico.Click += new System.EventHandler(this.ErrorSintactico_Click);
+            // 
+            // ErroresLexicosgroupBox
+            // 
+            this.ErroresLexicosgroupBox.Controls.Add(this.ErrorDataGridVIew);
+            this.ErroresLexicosgroupBox.Location = new System.Drawing.Point(8, 5);
+            this.ErroresLexicosgroupBox.Name = "ErroresLexicosgroupBox";
+            this.ErroresLexicosgroupBox.Size = new System.Drawing.Size(866, 360);
+            this.ErroresLexicosgroupBox.TabIndex = 14;
+            this.ErroresLexicosgroupBox.TabStop = false;
+            this.ErroresLexicosgroupBox.Text = "Errores Léxicos";
+            // 
+            // ErrorDataGridVIew
+            // 
+            this.ErrorDataGridVIew.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.ErrorDataGridVIew.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ErrorDataGridVIew.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.type,
+            this.cause,
+            this.solution,
+            this.ExpectedCategory,
+            this.Lexeme,
+            this.LineNumber,
+            this.InitialPosition,
+            this.FinalPosition});
+            this.ErrorDataGridVIew.Location = new System.Drawing.Point(6, 19);
+            this.ErrorDataGridVIew.Name = "ErrorDataGridVIew";
+            this.ErrorDataGridVIew.Size = new System.Drawing.Size(846, 328);
+            this.ErrorDataGridVIew.TabIndex = 0;
+            // 
+            // type
+            // 
+            this.type.HeaderText = "Tipo";
+            this.type.Name = "type";
+            // 
+            // cause
+            // 
+            this.cause.HeaderText = "Causa";
+            this.cause.Name = "cause";
+            // 
+            // solution
+            // 
+            this.solution.HeaderText = "Solución ";
+            this.solution.Name = "solution";
+            // 
+            // ExpectedCategory
+            // 
+            this.ExpectedCategory.HeaderText = "Categoría Esperada ";
+            this.ExpectedCategory.Name = "ExpectedCategory";
+            // 
+            // Lexeme
+            // 
+            this.Lexeme.HeaderText = "Lexema";
+            this.Lexeme.Name = "Lexeme";
+            // 
+            // LineNumber
+            // 
+            this.LineNumber.HeaderText = "Línea";
+            this.LineNumber.Name = "LineNumber";
+            // 
+            // InitialPosition
+            // 
+            this.InitialPosition.HeaderText = "Posición inicial";
+            this.InitialPosition.Name = "InitialPosition";
+            // 
+            // FinalPosition
+            // 
+            this.FinalPosition.HeaderText = "Posición Final";
+            this.FinalPosition.Name = "FinalPosition";
+            // 
+            // ErrorLexico
+            // 
+            this.ErrorLexico.BackColor = System.Drawing.Color.White;
+            this.ErrorLexico.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ErrorLexico.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.ErrorLexico.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightCoral;
+            this.ErrorLexico.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightCoral;
+            this.ErrorLexico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ErrorLexico.ForeColor = System.Drawing.Color.Black;
+            this.ErrorLexico.Location = new System.Drawing.Point(25, 381);
+            this.ErrorLexico.Margin = new System.Windows.Forms.Padding(0);
+            this.ErrorLexico.Name = "ErrorLexico";
+            this.ErrorLexico.Size = new System.Drawing.Size(75, 38);
+            this.ErrorLexico.TabIndex = 13;
+            this.ErrorLexico.Text = "Errores Léxicos";
+            this.ErrorLexico.UseVisualStyleBackColor = false;
+            this.ErrorLexico.Click += new System.EventHandler(this.ErrorLexico_Click);
             // 
             // Principal
             // 
@@ -746,10 +746,10 @@
             this.tablaDummyGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dummiesDataGridView)).EndInit();
             this.ErroresMenu.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.ErrorDataGridVIew)).EndInit();
-            this.ErroresLexicosgroupBox.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.ErroresSintacticosdataGridView)).EndInit();
             this.ErroresSintacticosgroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ErroresSintacticosdataGridView)).EndInit();
+            this.ErroresLexicosgroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ErrorDataGridVIew)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

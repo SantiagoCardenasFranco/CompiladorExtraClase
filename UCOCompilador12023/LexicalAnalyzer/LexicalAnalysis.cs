@@ -723,7 +723,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
                 INSTANCE.Lexeme + Scanner.GetCurrentCharacter());
 
             Concanate("0");
-            CreateComponentReturningIndex(Category.DECIMAL, ComponentType.DUMMY);
+            CreateComponentWithoutReturningIndex(Category.DECIMAL, ComponentType.DUMMY);
 
 
         }

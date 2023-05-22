@@ -3,7 +3,8 @@
     "",
     "\\UCOCompilador12023",
     "\\UCOCompilador12023\\DataCache",
-    "\\UCOCompilador12023\\LexicalAnalyzer"
+    "\\UCOCompilador12023\\LexicalAnalyzer",
+    "\\UCOCompilador12023\\SintacticAnalyzer"
   ],
   "SelectedNode": "\\UCOCompilador12023\\Principal.cs",
   "PreviewInSolutionExplorer": false

@@ -339,7 +339,7 @@ namespace UCOCompilador12023
         {
             ErroresLexicosgroupBox.Hide();
             ErroresSintacticosgroupBox.Show();
-            clearDataGrid(ErrorDataGridVIew);
+            clearDataGrid(ErroresSintacticosdataGridView);
             foreach (Error error in ErrorManagement.GetErrors(ErrorLevel.SINTACTICO))
             {
                 adicionarCeldaATablaErroresSintacticos(error.GetType(), error.GetCause(), error.GetSolution(), error.GetExpectedCategory(), error.GetLineNumber(),
