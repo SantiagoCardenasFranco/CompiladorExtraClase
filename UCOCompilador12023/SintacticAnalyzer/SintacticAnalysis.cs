@@ -13,6 +13,7 @@ namespace UCOCompilador12023.SintacticAnalyzer
 {
     public class SintacticAnalysis
     {
+        private Stack<double> stackData = new Stack<double>();
         private LexicalComponent component;
         //private LexicalAnalysis LexAna;
 
@@ -360,11 +361,24 @@ namespace UCOCompilador12023.SintacticAnalyzer
             {
                 LeerSiguienteComponente();
                 Expresion();
+                if (!ErrorManagement.HayErrores())
+                {
+                    double derecho = stackData.Pop();
+                    double izquierdo = stackData.Pop();
+
+                }
             }
             else if (EsCategoriaEsperada(Category.RESTA))
             {
+
                 LeerSiguienteComponente();
                 Expresion();
+                if (!ErrorManagement.HayErrores())
+                {
+                    double derecho = stackData.Pop();
+                    double izquierdo = stackData.Pop();
+
+                }
             }
 
         }
@@ -388,6 +402,22 @@ namespace UCOCompilador12023.SintacticAnalyzer
             {
                 LeerSiguienteComponente();
                 Termino();
+                if (!ErrorManagement.HayErrores())
+                {
+                    double derecho = stackData.Pop();
+                    double izquierdo = stackData.Pop();
+                    if(derecho == 0)
+                    {
+                        string fail = "Division por cero.";
+                        string cause = "Componente léxico igualñ a cero...";
+                        string solution = "Asegúrese de que en este lugar esté ubicado un número diferente a cero.";
+                        CreateSintaticError(ErrorType.CONTROLABLE, fail, cause, solution, Category.DECIMAL,
+                            "Cero (0)");
+                        derecho = 1;
+                    }
+                    stackData.Push(izquierdo / derecho);
+
+                }
             }
         }
 
@@ -395,10 +425,16 @@ namespace UCOCompilador12023.SintacticAnalyzer
         {
             if (EsCategoriaEsperada(Category.ENTERO))
             {
+                {
+                    stackData.Push(Double.Parse(component.GetLexeme()));
+                }
                 LeerSiguienteComponente();
             }
             else if (EsCategoriaEsperada(Category.DECIMAL))
             {
+                {
+                    stackData.Push(Double.Parse(component.GetLexeme()));
+                }
                 LeerSiguienteComponente();
             }
             else if (EsCategoriaEsperada(Category.IDENTIFICADOR))
@@ -529,7 +565,7 @@ namespace UCOCompilador12023.SintacticAnalyzer
                     finalPosition, fail, cause, solution, expectedCategory, lexema);
 
                 ErrorManagement.Agregar(error);
-                throw new Exception("Se ha presentado un error tipo STOPPER durante el análisis léxico " +
+                throw new Exception("Se ha presentado un error tipo STOPPER durante el análisis sintactico " +
                     "No es posible continuar con el proceso de compilación hasta que el error haya sido " +
                     "solucionado. Por favor verifique la consola de errores para tener más detalle del" +
                     "problema que se ha presentado ");
@@ -539,6 +575,34 @@ namespace UCOCompilador12023.SintacticAnalyzer
                 int finalPosition = component.GetFinalPosition();
                 int initialPosition = component.GetInitialPosition();
                 error = Error.CreateNoStopperSintacticError(lineNumber, initialPosition,
+                    finalPosition, fail, cause, solution, expectedCategory, lexema);
+                ErrorManagement.Agregar(error);
+            }
+        }
+
+        private void CreateSemanticError(ErrorType errorType, string fail, string cause, string solution, Category expectedCategory, string lexema)
+        {
+            int lineNumber = component.GetLineNumber();
+            Error error;
+
+            if (ErrorType.STOPPER.Equals(errorType))
+            {
+                int finalPosition = component.GetFinalPosition();
+                int initialPosition = component.GetInitialPosition();
+                error = Error.CreateStopperSemanticlError(lineNumber, initialPosition,
+                    finalPosition, fail, cause, solution, expectedCategory, lexema);
+
+                ErrorManagement.Agregar(error);
+                throw new Exception("Se ha presentado un error tipo STOPPER durante el análisis semántico " +
+                    "No es posible continuar con el proceso de compilación hasta que el error haya sido " +
+                    "solucionado. Por favor verifique la consola de errores para tener más detalle del" +
+                    "problema que se ha presentado ");
+            }
+            else if (ErrorType.CONTROLABLE.Equals(errorType))
+            {
+                int finalPosition = component.GetFinalPosition();
+                int initialPosition = component.GetInitialPosition();
+                error = Error.CreateNoStopperSemanticError(lineNumber, initialPosition,
                     finalPosition, fail, cause, solution, expectedCategory, lexema);
                 ErrorManagement.Agregar(error);
             }

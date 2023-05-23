@@ -33,6 +33,7 @@ namespace UCOCompilador12023.ErrorManager
             ExpectedCategory = expectedCategory;
             Lexeme = lexeme;
         }
+        
 
         public static Error CreateStopperLexicalError(int lineNumber, int initialPosition, int finalPosition, string fail, string cause, string solution, Category expectedCategory, string lexeme)
         {
@@ -43,7 +44,12 @@ namespace UCOCompilador12023.ErrorManager
         {
             return new Error(lineNumber, initialPosition, finalPosition, fail, cause, solution, ErrorLevel.SINTACTICO, ErrorType.STOPPER, expectedCategory, lexeme);
         }
+        
 
+        public static Error CreateStopperSemanticlError(int lineNumber, int initialPosition, int finalPosition, string fail, string cause, string solution, Category expectedCategory, string lexeme)
+        {
+            return new Error(lineNumber, initialPosition, finalPosition, fail, cause, solution, ErrorLevel.SEMATICO, ErrorType.STOPPER, expectedCategory, lexeme);
+        }
 
         public static Error CreateNoStopperLexicalError(int lineNumber, int initialPosition, int finalPosition, string fail, string cause, string solution, Category expectedCategory, string lexeme)
         {
@@ -54,6 +60,12 @@ namespace UCOCompilador12023.ErrorManager
         {
             return new Error(lineNumber, initialPosition, finalPosition, fail, cause, solution, ErrorLevel.SINTACTICO, ErrorType.CONTROLABLE, expectedCategory, lexeme);
         }
+
+        public static Error CreateNoStopperSemanticError(int lineNumber, int initialPosition, int finalPosition, string fail, string cause, string solution, Category expectedCategory, string lexeme)
+        {
+            return new Error(lineNumber, initialPosition, finalPosition, fail, cause, solution, ErrorLevel.SEMATICO, ErrorType.STOPPER, expectedCategory, lexeme);
+        }
+
 
         public void SetLineNumber(int lineNumber)
         {
