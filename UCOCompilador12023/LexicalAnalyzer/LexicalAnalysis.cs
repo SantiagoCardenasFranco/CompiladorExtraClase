@@ -841,7 +841,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
         {
             //Retorno fin del archivo
             //Si es un literal
-            CreateComponentWithoutReturningIndex(Category.FIN_DE_ARCHIVO, ComponentType.NORMAL);
+            CreateComponentWithoutReturningIndex(Category.FIN_DE_ARCHIVO, ComponentType.LITERAL);
         }
 
         private static void ProcessState21()
@@ -985,6 +985,7 @@ namespace UCOCompilador12023.LexicalAnalyzer
             {
                 Concanate();
                 INSTANCE.CurrentState = 0;
+                CreateComponentWithoutReturningIndex(Category.COMENTARIO_MULTILINEA, ComponentType.LITERAL);
             }
             else
             {

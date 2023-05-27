@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing.Text;
@@ -35,8 +36,16 @@ namespace UCOCompilador12023.SintacticAnalyzer
             }
             else if(!Category.FIN_DE_ARCHIVO.Equals(component.GetCategory()))
             {
-                response = "No se presentaron errores, pero faltaron componenetes por evaluar...";
+                response = "No se presentaron errores, el proceso de compilación sinatctico pero faltaron componenetes por evaluar...";
+            }/*else if(stackData.Count > 1)
+            {
+                response = "No se presentaron errores, el proceso de compilación sematico pero faltaron componenetes por evaluar...";
             }
+            else
+            {
+                response = "\n" + "El resultado de la operación es: " + stackData.Pop();
+            }*/
+
 
             return response;
         }
@@ -49,7 +58,7 @@ namespace UCOCompilador12023.SintacticAnalyzer
                 {
                     LeerSiguienteComponente();
                     GrupoSentencias();
-                    if (EsCategoriaEsperada(Category.FIN_DE_ARCHIVO))
+                    /*if (EsCategoriaEsperada(Category.FIN_DE_ARCHIVO))
                     {
                         LeerSiguienteComponente();
                     }
@@ -60,7 +69,7 @@ namespace UCOCompilador12023.SintacticAnalyzer
                         string solution = "Asegúrese de que en este lugar esté ubicado un fin de archivo (\"}\").";
                         CreateSintaticError(ErrorType.STOPPER, fail, cause, solution, Category.FIN_DE_ARCHIVO,
                             component.GetCategory().ToString());
-                    }
+                    }*/
 
                 }
                 else
@@ -86,52 +95,26 @@ namespace UCOCompilador12023.SintacticAnalyzer
         private void GrupoSentencias()
         {
             Sentencia();
-            GrupoSentencias();
         }
 
         private void Sentencia()
         {
             AsignacionPrima();
-            EntradaPrima();
-            ConcatenarPrima();
-            CondicionalPrima();
-            ComentarioPrima();
+            //EntradaPrima();
+            //ConcatenarPrima();
+            //CondicionalPrima();
+            //ComentarioPrima();
    
         }
 
         private void AsignacionPrima()
         {
             Asignacion();
-            LeerSiguienteComponente();
         }
 
-        private void EntradaPrima()
-        {
-            Entrada();
-            LeerSiguienteComponente();
-        }
-
-        private void CondicionalPrima()
-        {
-            Condicional();
-            LeerSiguienteComponente();
-        }
-
-        private void ComentarioPrima()
-        {
-            Comentario();
-            LeerSiguienteComponente();
-        }
-
-        private void ConcatenarPrima()
-        {
-            Concatenar();
-            LeerSiguienteComponente();
-        }
 
         private void Concatenar()
         {
-            Salida();
             if (EsCategoriaEsperada(Category.CONCATENACION))
             {
                 LeerSiguienteComponente();
@@ -148,6 +131,7 @@ namespace UCOCompilador12023.SintacticAnalyzer
                 {
                     LeerSiguienteComponente();
                     Expresion();
+                    Asignacion();
                 }
                 else
                 {
@@ -161,11 +145,7 @@ namespace UCOCompilador12023.SintacticAnalyzer
             }
             else
             {
-                string fail = "Componente sintactico no corresponde a un identificador.";
-                string cause = "Componente sintactico no experado en este lugar...";
-                string solution = "Asegúrese de que en este lugar esté ubicado un identificador.";
-                CreateSintaticError(ErrorType.STOPPER, fail, cause, solution, Category.IDENTIFICADOR,
-                    component.GetCategory().ToString());
+                Entrada();
             }
         }
 
@@ -215,11 +195,12 @@ namespace UCOCompilador12023.SintacticAnalyzer
             }
             else
             {
-                string fail = "Componente sintactico no corresponde a un leer.";
-                string cause = "Componente sintactico no experado en este lugar...";
-                string solution = "Asegúrese de que en este lugar esté ubicado un leer.";
-                CreateSintaticError(ErrorType.STOPPER, fail, cause, solution, Category.INPUT,
-                    component.GetCategory().ToString());
+                Condicional();
+                //string fail = "Componente sintactico no corresponde a un leer.";
+                //string cause = "Componente sintactico no experado en este lugar...";
+                //string solution = "Asegúrese de que en este lugar esté ubicado un leer.";
+                //CreateSintaticError(ErrorType.STOPPER, fail, cause, solution, Category.INPUT,
+                //    component.GetCategory().ToString());
 
             }
         }
@@ -319,11 +300,12 @@ namespace UCOCompilador12023.SintacticAnalyzer
             }
             else
             {
-                string fail = "Componente sintactico no corresponde a un si.";
-                string cause = "Componente sintactico no experado en este lugar...";
-                string solution = "Asegúrese de que en este lugar esté ubicado un si.";
-                CreateSintaticError(ErrorType.STOPPER, fail, cause, solution, Category.SI,
-                    component.GetCategory().ToString());
+                Comentario();
+             //   string fail = "Componente sintactico no corresponde a un si.";
+             //   string cause = "Componente sintactico no experado en este lugar...";
+             //   string solution = "Asegúrese de que en este lugar esté ubicado un si.";
+             //   CreateSintaticError(ErrorType.STOPPER, fail, cause, solution, Category.SI,
+             //       component.GetCategory().ToString());
 
             }
         }
@@ -341,11 +323,12 @@ namespace UCOCompilador12023.SintacticAnalyzer
             }
             else
             {
-                string fail = "Componente sintactico no corresponde a un comentario.";
-                string cause = "Componente sintactico no experado en este lugar...";
-                string solution = "Asegúrese de que en este lugar esté ubicado un un comentario.";
-                CreateSintaticError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL,
-                    component.GetCategory().ToString());
+                Concatenar();
+                //string fail = "Componente sintactico no corresponde a un comentario.";
+                //string cause = "Componente sintactico no experado en este lugar...";
+                //string solution = "Asegúrese de que en este lugar esté ubicado un un comentario.";
+                //CreateSintaticError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL,
+                //    component.GetCategory().ToString());
             }
         }
 
@@ -361,24 +344,24 @@ namespace UCOCompilador12023.SintacticAnalyzer
             {
                 LeerSiguienteComponente();
                 Expresion();
-                if (!ErrorManagement.HayErrores())
+                /*if (!ErrorManagement.HayErrores())
                 {
                     double derecho = stackData.Pop();
                     double izquierdo = stackData.Pop();
-
-                }
+                    stackData.Push(izquierdo * derecho);
+                }*/
             }
             else if (EsCategoriaEsperada(Category.RESTA))
             {
 
                 LeerSiguienteComponente();
                 Expresion();
-                if (!ErrorManagement.HayErrores())
+                /*if (!ErrorManagement.HayErrores())
                 {
                     double derecho = stackData.Pop();
                     double izquierdo = stackData.Pop();
-
-                }
+                    stackData.Push(izquierdo * derecho);
+                }*/
             }
 
         }
@@ -387,7 +370,7 @@ namespace UCOCompilador12023.SintacticAnalyzer
         {
             Factor();
             TerminoPrima();
-
+            
         }
 
         private void TerminoPrima()
@@ -396,6 +379,12 @@ namespace UCOCompilador12023.SintacticAnalyzer
             {
                 LeerSiguienteComponente();
                 Termino();
+                /*if (!ErrorManagement.HayErrores())
+                {
+                    double derecho = stackData.Pop();
+                    double izquierdo = stackData.Pop();
+                    stackData.Push(izquierdo * derecho);
+                }*/
 
             }
             else if (EsCategoriaEsperada(Category.DIVISION))
@@ -452,7 +441,8 @@ namespace UCOCompilador12023.SintacticAnalyzer
                 else
                 {
                     string fail = "Componente sintactico no corresponde a un parentesis que cierra...";
-                    string cause = "Componente sintactico no experado en este lugar...";
+                    string 
+                        cause = "Componente sintactico no experado en este lugar...";
                     string solution = "Asegúrese de que en este lugar esté ubicado un parentesis que cierra.";
                     CreateSintaticError(ErrorType.STOPPER, fail, cause, solution, Category.PARENTESIS_CIERRA,
                         component.GetCategory().ToString());
@@ -474,8 +464,7 @@ namespace UCOCompilador12023.SintacticAnalyzer
         {
             Expresion();
             ComparacionPrima();
-
-            LeerSiguienteComponente();
+            Expresion();
             ComparacionLogica();
         }
 
