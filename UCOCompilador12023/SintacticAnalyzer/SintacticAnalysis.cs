@@ -460,23 +460,22 @@ namespace UCOCompilador12023.SintacticAnalyzer
             }
         }
 
-        private void Comparacion()
+        /*private void Comparacion()
         {
             Expresion();
             ComparacionPrima();
             ComparacionLogica();
-        }
+        }*/
 
-        private void ComparacionPrima()
+        /*private void ComparacionPrima()
         {
             Comparador();
             Expresion();
-        }
+        }*/
 
         private void ComparacionLogica()
         {
-            Comparacion();
-            ComparacionLogicaPrima();
+            Expresion();
         }
 
         private void ComparacionLogicaPrima()
@@ -497,6 +496,7 @@ namespace UCOCompilador12023.SintacticAnalyzer
         {
             Comparador();
             Factor();
+            ComparacionLogicaPrima();
         }
 
         private void Comparador()
