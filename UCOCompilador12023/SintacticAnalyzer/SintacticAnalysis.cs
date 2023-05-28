@@ -336,6 +336,7 @@ namespace UCOCompilador12023.SintacticAnalyzer
         {
             Termino();
             ExpresionPrima();
+            //Comparador();
         }
 
         private void ExpresionPrima()
@@ -464,7 +465,6 @@ namespace UCOCompilador12023.SintacticAnalyzer
         {
             Expresion();
             ComparacionPrima();
-            Expresion();
             ComparacionLogica();
         }
 
