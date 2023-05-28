@@ -255,7 +255,8 @@ namespace UCOCompilador12023.SintacticAnalyzer
             if (EsCategoriaEsperada(Category.SI))
             {
                 LeerSiguienteComponente();
-                Comparacion();
+                Expresion();
+                operanorComaprador();
                 if (EsCategoriaEsperada(Category.ENTONCES))
                 {
                     LeerSiguienteComponente();
@@ -336,7 +337,7 @@ namespace UCOCompilador12023.SintacticAnalyzer
         {
             Termino();
             ExpresionPrima();
-            //Comparador();
+            operanorComaprador();
         }
 
         private void ExpresionPrima()
@@ -415,16 +416,16 @@ namespace UCOCompilador12023.SintacticAnalyzer
         {
             if (EsCategoriaEsperada(Category.ENTERO))
             {
-                {
-                    stackData.Push(Double.Parse(component.GetLexeme()));
-                }
+                //{
+                //    stackData.Push(Double.Parse(component.GetLexeme()));
+                //}
                 LeerSiguienteComponente();
             }
             else if (EsCategoriaEsperada(Category.DECIMAL))
             {
-                {
-                    stackData.Push(Double.Parse(component.GetLexeme()));
-                }
+                //{
+                //    stackData.Push(Double.Parse(component.GetLexeme()));
+                //}
                 LeerSiguienteComponente();
             }
             else if (EsCategoriaEsperada(Category.IDENTIFICADOR))
@@ -451,8 +452,6 @@ namespace UCOCompilador12023.SintacticAnalyzer
             }
             else
             {
-                LeerSiguienteComponente();
-                Comparacion();
                 //string fail = "Componente léxico no corresponde a un parentesis que abre, Entero o Decimal...";
                 //string cause = "Componente léxico no experado en este lugar...";
                 //string solution = "Asegúrese de que en este lugar esté ubicado un parentesis que abre, Entero o Decimal.";
@@ -494,39 +493,19 @@ namespace UCOCompilador12023.SintacticAnalyzer
             }
         }
 
+        private void operanorComaprador()
+        {
+            Comparador();
+            Factor();
+        }
+
         private void Comparador()
         {
-            if (EsCategoriaEsperada(Category.MENOR_QUE))
+            if (EsCategoriaEsperada(Category.MENOR_QUE) || EsCategoriaEsperada(Category.MENOR_IGUAL_QUE)
+                || EsCategoriaEsperada(Category.MAYOR_IGUAL_QUE) || EsCategoriaEsperada(Category.MAYOR_QUE) 
+                || EsCategoriaEsperada(Category.DIFERENTE_QUE)|| EsCategoriaEsperada(Category.IGUAL_QUE))
             {
                 LeerSiguienteComponente();
-            }
-            else if (EsCategoriaEsperada(Category.MENOR_IGUAL_QUE))
-            {
-                LeerSiguienteComponente();
-            }
-            else if (EsCategoriaEsperada(Category.MAYOR_IGUAL_QUE))
-            {
-                LeerSiguienteComponente();
-            }
-            else if (EsCategoriaEsperada(Category.MAYOR_QUE))
-            {
-                LeerSiguienteComponente();
-            }
-            else if (EsCategoriaEsperada(Category.DIFERENTE_QUE))
-            {
-                LeerSiguienteComponente();
-            }
-            else if (EsCategoriaEsperada(Category.IGUAL_QUE))
-            {
-                LeerSiguienteComponente();
-            }
-            else
-            {
-                string fail = "Componente sintactico no corresponde a un opreador de compraración ...";
-                string cause = "Componente sintactico no experado en este lugar...";
-                string solution = "Asegúrese de que en este lugar esté ubicado un >, <, >=, <=, !=, ==.";
-                CreateSintaticError(ErrorType.STOPPER, fail, cause, solution, Category.GENERAL,
-                   component.GetCategory().ToString());
             }
         }
 
