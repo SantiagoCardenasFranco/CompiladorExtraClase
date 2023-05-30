@@ -14,7 +14,6 @@ namespace UCOCompilador12023.SintacticAnalyzer
 {
     public class SintacticAnalysis
     {
-        private Stack<double> stackData = new Stack<double>();
         private LexicalComponent component;
         //private LexicalAnalysis LexAna;
 
@@ -58,7 +57,7 @@ namespace UCOCompilador12023.SintacticAnalyzer
                 {
                     LeerSiguienteComponente();
                     GrupoSentencias();
-                    /*if (EsCategoriaEsperada(Category.FIN_DE_ARCHIVO))
+                    if (EsCategoriaEsperada(Category.FIN_DE_ARCHIVO))
                     {
                         LeerSiguienteComponente();
                     }
@@ -69,7 +68,7 @@ namespace UCOCompilador12023.SintacticAnalyzer
                         string solution = "Asegúrese de que en este lugar esté ubicado un fin de archivo (\"}\").";
                         CreateSintaticError(ErrorType.STOPPER, fail, cause, solution, Category.FIN_DE_ARCHIVO,
                             component.GetCategory().ToString());
-                    }*/
+                    }
 
                 }
                 else
@@ -95,10 +94,12 @@ namespace UCOCompilador12023.SintacticAnalyzer
         private void GrupoSentencias()
         {
             Sentencia();
+            GrupoSentencias();
         }
 
         private void Sentencia()
         {
+            finArchivo();
             AsignacionPrima();
             //EntradaPrima();
             //ConcatenarPrima();
@@ -211,19 +212,11 @@ namespace UCOCompilador12023.SintacticAnalyzer
             {
                 LeerSiguienteComponente();
                 OpcionalExpresion();
-                //LeerSiguienteComponente();
                 OpcionalTexto();
-                //LeerSiguienteComponente();
-                OpcionalExpresion();
             }
             else
             {
-                string fail = "Componente sintactico no corresponde a un imprima.";
-                string cause = "Componente sintactico no experado en este lugar...";
-                string solution = "Asegúrese de que en este lugar esté ubicado un imprima.";
-                CreateSintaticError(ErrorType.STOPPER, fail, cause, solution, Category.IMPRIMA,
-                    component.GetCategory().ToString());
-
+                OpcionalTexto();
             }
         }
 
@@ -256,7 +249,6 @@ namespace UCOCompilador12023.SintacticAnalyzer
             {
                 LeerSiguienteComponente();
                 Expresion();
-                operanorComaprador();
                 if (EsCategoriaEsperada(Category.ENTONCES))
                 {
                     LeerSiguienteComponente();
@@ -333,6 +325,14 @@ namespace UCOCompilador12023.SintacticAnalyzer
             }
         }
 
+        private void finArchivo()
+        {
+            if (EsCategoriaEsperada(Category.FIN_DE_ARCHIVO))
+            {
+                LeerSiguienteComponente();
+            }
+        }
+
         private void Expresion()
         {
             Termino();
@@ -393,7 +393,7 @@ namespace UCOCompilador12023.SintacticAnalyzer
             {
                 LeerSiguienteComponente();
                 Termino();
-                if (!ErrorManagement.HayErrores())
+                /*if (!ErrorManagement.HayErrores())
                 {
                     double derecho = stackData.Pop();
                     double izquierdo = stackData.Pop();
@@ -408,7 +408,7 @@ namespace UCOCompilador12023.SintacticAnalyzer
                     }
                     stackData.Push(izquierdo / derecho);
 
-                }
+                }*/
             }
         }
 
