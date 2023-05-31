@@ -93,8 +93,12 @@ namespace UCOCompilador12023.SintacticAnalyzer
 
         private void GrupoSentencias()
         {
-            Sentencia();
-            GrupoSentencias();
+            if (!EsCategoriaEsperada(Category.FIN_DE_ARCHIVO))
+            {
+                Sentencia();
+                GrupoSentencias();
+            }
+
         }
 
         private void Sentencia()
